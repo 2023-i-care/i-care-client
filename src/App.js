@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-import Communication from './Communication';
+import Login from './page/Login';
+import Communication from './page/Communication';
+
 function App() {
   return (
    <Communication/>
