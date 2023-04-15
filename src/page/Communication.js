@@ -1,11 +1,10 @@
 import './Communication.css';
-import {Route} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faBorderNone } from "@fortawesome/free-solid-svg-icons";
+import { faBars} from "@fortawesome/free-solid-svg-icons";
 import logo from '../img/logo.png'
 import mom from '../img/mom.png';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import heart from '../img/heart.png';
 import communi from '../img/communi.png';
 import pink_heart from '../img/pink_heart.png';
@@ -50,7 +49,7 @@ const Communication = () => {
             </nav>
 
             <body>
-                <button className='story'>당신의 이야기를 들려주세요</button>
+                <Link to='/writing' className='story'>당신의 이야기를 들려주세요</Link>
 
                 <div className='communi-box'>
                     산후 우울증에 대해...
