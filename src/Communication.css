@@ -53,7 +53,7 @@ img{
     font-size: 24px;
     color: white;
 }
-button{
+.story{
     width: 100px;
     margin: auto;
     display: block;
@@ -66,6 +66,32 @@ button{
     box-shadow: 5px 5px 5px rgb(145, 145, 145);
     color: #F6D697;
 }
+.communi-box{
+    width: 450px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #FFF9E3;
+    border-radius: 30px;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 45px;
+    margin-left: 250px;
+    margin-top: 50px;
+}
+.heart {
+   padding-left: 160px;
+   width: 30px;
+   height: 25px;
+   padding-top: 15px;
+   vertical-align: middle;
+}
+.Vector {
+    width: 30px;
+    height: 25px;
+    padding-left: 20px;
+    padding-top: 15px;
+    vertical-align: middle;
+ }
 @media screen and (max-width: 1023px) {
        .navbar_menu {
             margin-left: 300px;

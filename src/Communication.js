@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import heart from './heart.png';
+import Vector from './Vector.png';
 
 const Communication = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,7 +35,15 @@ const Communication = () => {
             </nav>
 
             <body>
-                <button>당신의 이야기를 들려주세요</button>
+                <button className='story'>당신의 이야기를 들려주세요</button>
+
+                <div className='communi-box'>
+                    산후 우울증에 대해...
+                               
+                    <img className='heart' src={heart} alt="heart"/>
+                    <img className='Vector' src={Vector} alt="Vector"/>
+                    
+                </div>
             </body>
         </div>
     );
