@@ -92,12 +92,7 @@ img{
     padding-top: 15px;
     vertical-align: middle;
  }
-@media screen and (max-width: 1023px) {
-       .navbar_menu {
-            margin-left: 300px;
-       }
-       
-}
+
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -108,7 +103,8 @@ img{
     .navbar_menu {
         display: none;
         flex-direction: column;
-        align-items: center;
+        margin-right: 500px;
+        
         width: 100%;
     }
     .navbar_menu li {
