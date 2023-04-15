@@ -9,11 +9,15 @@ import styled from 'styled-components';
 import heart from '../img/heart.png';
 import communi from '../img/communi.png';
 import pink_heart from '../img/pink_heart.png';
+import Group from '../img/Group.png';
 
 
 const Communication = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClick, setIsClick] = useState(false);
+    const [text, setText] = useState('');
+
+   
 
     const click_heart = () => {
         setIsClick(!isClick);
@@ -29,14 +33,16 @@ const Communication = () => {
             <nav className='navbar'>
                 <div className='navbar_logo'>
                     <a href=''>
-                        <img src={logo} alt='logo'/>
+                        <img className='logo' src={logo} alt='logo'/>
+                        <input className='input'/>
+                        <button className='group'><img src={Group}/></button>
                     </a>
                 </div>
                 <ul className={`navbar_menu ${isMenuOpen ? 'active' : ''}`}>
                     <li><a href=''>소통방</a></li>
                     <li><a href=''>육아팁</a></li>
                     <li><a href=''>다이어리</a></li>
-                    <li><img src={mom}/></li>
+                    <li><img className='mom' src={mom}/></li>
                 </ul>
                 <a href='#' className='navbar_toggleBtn' onClick={toggleMenu}>
                     <FontAwesomeIcon icon={faBars} />
