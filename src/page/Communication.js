@@ -1,22 +1,29 @@
 import './Communication.css';
 import {Route} from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBorderNone } from "@fortawesome/free-solid-svg-icons";
 import logo from '../img/logo.png'
 import mom from '../img/mom.png';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import heart from '../img/heart.png';
-import Vector from '../img/Vector.png';
+import communi from '../img/communi.png';
+import pink_heart from '../img/pink_heart.png';
 
 
 const Communication = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isClick, setIsClick] = useState(false);
 
+    const click_heart = () => {
+        setIsClick(!isClick);
+    }
+
+    
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-    
+   
     return (
         <div>
             <nav className='navbar'>
@@ -42,8 +49,10 @@ const Communication = () => {
                 <div className='communi-box'>
                     산후 우울증에 대해...
                                
-                    <img className='heart' src={heart} alt="heart"/>
-                    <img className='Vector' src={Vector} alt="Vector"/>
+
+                <img src={isClick? pink_heart: heart} alt='img' onClick={click_heart} className='heart'/>
+                    
+                    <img className='communi' src={communi} alt="communi"/>
                     
                 </div>
             </body>
