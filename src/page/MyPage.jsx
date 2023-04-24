@@ -1,14 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from '../components/Navbar';
-
+import Navbar from "../components/Navbar";
+import profile from "../img/profile.png";
+import "./MyPage.css";
 const MyPage = () => {
-    return (
-        <>
-            <Navbar/>
-            <h1>마이페이지입니다.</h1>
-        </>
-    );
-}
+  return (
+    <>
+      <Navbar />
+      <div className="img">
+        <img className="img-1" src={profile} />
+      </div>
+      <div>
+        <p className="text">
+          닉네임 : 설윤 맘미
+          <br /> 아이디 : smom.546
+          <br /> 생일 : 2006.02.03
+        </p>
+      </div>
+    </>
+  );
+};
 
 export default MyPage;
