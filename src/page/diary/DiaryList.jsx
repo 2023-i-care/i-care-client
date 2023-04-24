@@ -1,10 +1,19 @@
 import React from "react";
-import styled from "styled-components";
+import "./DiaryList.css";
 
 const DiaryList = () => {
-    return (
-        <h1>일기 글 목록 페이지입니다.</h1>
-    );
-}
+  return (
+    <div>
+      <div className="post">
+        <p>우리 아가의 이야기를 기록해보세요.</p>
+      </div>
+      <div className="box"></div>
+      <div className="box"></div>
+      <div className="box"></div>
+      <div className="box"></div>
+      <div className="box"></div>
+    </div>
+  );
+};
 
 export default DiaryList;
