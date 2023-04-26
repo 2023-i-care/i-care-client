@@ -53,7 +53,7 @@ const SignUp = (props) => {
                         })
                           .then(res => res.json())
                           .then(json => {
-                            if(json.isSuccess === "True"){
+                            if(json.isSuccess === true){
                               alert('회원가입이 완료되었습니다!');
                               props.setMode("LOGIN");
                             }

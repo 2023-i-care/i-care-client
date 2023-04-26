@@ -19,7 +19,7 @@ function App() {
     fetch("http://localhost:3001/authcheck")
       .then((res) => res.json())
       .then((json) => {        
-        if (json.isLogin === "True") setMode("WELCOME");
+        if (json.isLogin === true) setMode("WELCOME");
         else setMode("LOGIN");
       });
   }, []); 

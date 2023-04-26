@@ -40,7 +40,7 @@ const Login = (props) => {
                         })
                         .then(res => res.json())
                         .then(json => {  
-                            if(json.isLogin === "True") props.setMode("WELCOME");
+                            if(json.isLogin === true) props.setMode("WELCOME");
                             else alert(json.isLogin);
                         });
                     }}>Login</Button>
