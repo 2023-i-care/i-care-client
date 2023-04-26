@@ -51,8 +51,8 @@ const SignUp = (props) => {
                           },
                           body: JSON.stringify(userData), //userData라는 객체를 보냄
                         })
-                          .then((res) => res.json())
-                          .then((json) => {
+                          .then(res => res.json())
+                          .then(json => {
                             if(json.isSuccess === "True"){
                               alert('회원가입이 완료되었습니다!');
                               props.setMode("LOGIN");

@@ -38,9 +38,8 @@ const Login = (props) => {
                         },
                         body: JSON.stringify(userData), //userData라는 객체를 보냄
                         })
-                        .then((res) => res.json())
-                        .then((json) => {         
-                            console.log(json.isLogin)   
+                        .then(res => res.json())
+                        .then(json => {  
                             if(json.isLogin === "True") props.setMode("WELCOME");
                             else alert(json.isLogin);
                         });

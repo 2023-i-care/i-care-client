@@ -10,31 +10,18 @@ import styled from "styled-components";
 const TipList = () => {
     const [isClick, setIsClick] = useState(false);
 
-   
-
     const click_heart = () => {
         setIsClick(!isClick);
     }
-
    
     return (
         <div>
-
-            <body>
-            <>
             <Button href="/Tip/posting">당신의 팁을 들려주세요</Button>
-            </>
-
-                <div className='communi-box'>
-                    아이가 잠을 안 잘때!
-                               
-
-                <img src={isClick? pink_heart: heart} alt='img' onClick={click_heart} className='heart'/>
-                    
-                    <img className='communi' src={communi} alt="communi"/>
-                    
-                </div>
-            </body>
+            <div className='communi-box'>
+                아이가 잠을 안 잘때!                              
+                <img src={isClick? pink_heart: heart} alt='img' onClick={click_heart} className='heart'/>             
+                <img className='communi' src={communi} alt="communi"/>            
+            </div>
         </div>
     );
 };

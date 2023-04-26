@@ -9,31 +9,18 @@ const CommunityList = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClick, setIsClick] = useState(false);
 
-   
-
     const click_heart = () => {
         setIsClick(!isClick);
     }
-
    
     return (
         <div>
-
-            <body>
-            <>
             <Button href="/community/posting">당신의 이야기를 들려주세요</Button>
-            </>
-
-                <div className='communi-box'>
-                    산후 우울증에 대해...
-                               
-
-                <img src={isClick? pink_heart: heart} alt='img' onClick={click_heart} className='heart'/>
-                    
-                    <img className='communi' src={communi} alt="communi"/>
-                    
-                </div>
-            </body>
+            <div className='communi-box'>
+                산후 우울증에 대해...      
+                <img src={isClick? pink_heart: heart} alt='img' onClick={click_heart} className='heart'/>               
+                <img className='communi' src={communi} alt="communi"/>                
+            </div>
         </div>
     );
 };
