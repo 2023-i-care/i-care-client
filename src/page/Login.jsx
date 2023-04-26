@@ -25,7 +25,8 @@ const Login = (props) => {
                     }}/>
                 <Button 
                     type="submit"
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.preventDefault();
                         const userData = {
                             userId: id,
                             userPassword: password,
@@ -38,17 +39,14 @@ const Login = (props) => {
                         body: JSON.stringify(userData), //userData라는 객체를 보냄
                         })
                         .then((res) => res.json())
-                        .then((json) => {            
-                            if(json.isLogin==="True"){
-                            props.setMode("WELCOME");
-                            }
-                            else {
-                            alert(json.isLogin)
-                            }
+                        .then((json) => {         
+                            console.log(json.isLogin)   
+                            if(json.isLogin === "True") props.setMode("WELCOME");
+                            else alert(json.isLogin);
                         });
                     }}>Login</Button>
             </Form>
-            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup">Sign Up</SignUpBtn></Text>
+            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup" onClick={() => props.setMode("SIGNUP")}>Sign Up</SignUpBtn></Text>
         </Container>
     );
 }

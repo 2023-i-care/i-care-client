@@ -53,17 +53,15 @@ const SignUp = (props) => {
                         })
                           .then((res) => res.json())
                           .then((json) => {
-                            if(json.isSuccess==="True"){
-                              alert('회원가입이 완료되었습니다!')
+                            if(json.isSuccess === "True"){
+                              alert('회원가입이 완료되었습니다!');
                               props.setMode("LOGIN");
                             }
-                            else{
-                              alert(json.isSuccess)
-                            }
+                            else alert(json.isSuccess);
                           });
                     }}>Sign Up</Button>
             </Form>
-            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login">Login</SignUpBtn></Text>
+            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login" onClick={() => props.setMode("LOGIN")}>Login</SignUpBtn></Text>
         </Container>
     );
 }
