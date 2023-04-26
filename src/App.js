@@ -11,27 +11,27 @@ import MyPage from './page/MyPage';
 function App() {
   const [mode, setMode] = useState("");
   const [content, setContent] = useState("");
+  const matchPath = {
+    path: "/Community"
+  }
 
   useEffect(() => {
     fetch("http://localhost:3001/authcheck")
       .then((res) => res.json())
       .then((json) => {        
-        if (json.isLogin === "True") {
-          setMode("WELCOME");
-        } else {
-          setMode("LOGIN");
-        }
+        if (json.isLogin === "True") setMode("WELCOME");
+        else setMode("LOGIN");
       });
   }, []); 
   
   useEffect(() => {
-        if(mode==="LOGIN"){
-          setContent(<Login setMode={setMode} />);
-        } else if (mode === "SIGNUP") {
-          setContent(<SignUp setMode={setMode} />); 
-        } else if (mode === "WELCOME") {
-          setContent(<Community/>);
-        }
+    if(mode==="LOGIN"){
+      setContent(<Login setMode={setMode} />);
+    } else if (mode === "SIGNUP") {
+      setContent(<SignUp setMode={setMode} />); 
+    } else if (mode === "WELCOME") {
+      setContent(<Community match={matchPath}/>);
+    }
   }, [mode]); 
 
   return (
