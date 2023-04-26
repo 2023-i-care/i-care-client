@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import profile from "../img/profile.png";
 import "./MyPage.css";
@@ -8,7 +7,7 @@ const MyPage = () => {
     <>
       <Navbar />
       <div className="img">
-        <img className="img-1" src={profile} />
+        <img className="img-1" src={profile} alt="프로필"/>
       </div>
       <div>
         <p className="text">

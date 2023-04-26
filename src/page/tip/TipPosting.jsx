@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import './TipPosting.css';
 import Group2 from '../../img/Group2.png';
+
 const TipPosting = () => {
 
     return(
@@ -10,7 +10,7 @@ const TipPosting = () => {
                 <thead>
                     <tr>
                     <th></th>
-                    <button className='group2'><img src={Group2}/></button>
+                    <button className='group2'><img src={Group2} alt="group"/></button>
                     </tr>
                 </thead>
             </table>

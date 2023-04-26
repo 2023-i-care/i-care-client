@@ -1,5 +1,4 @@
 import './TipList.css';
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import heart from '../../img/heart.png';
 import communi from '../../img/communi.png';

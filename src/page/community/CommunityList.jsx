@@ -6,7 +6,6 @@ import pink_heart from '../../img/pink_heart.png';
 import styled from "styled-components";
 
 const CommunityList = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClick, setIsClick] = useState(false);
 
     const click_heart = () => {
