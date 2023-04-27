@@ -17,6 +17,8 @@ const MyPage = () => {
           <br /> 생일 : 2006.02.03
         </p>
       </div>
+      <button className="button">정보수정</button>
+      <button className="button">저장</button>
     </>
   );
 };
