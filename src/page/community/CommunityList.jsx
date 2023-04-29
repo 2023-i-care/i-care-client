@@ -1,4 +1,4 @@
-import './Communication.css';
+import './CommunityList.module.css';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import heart from '../../img/heart.png';
@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 
 const CommunityList = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClick, setIsClick] = useState(false);
 
    

@@ -1,0 +1,22 @@
+.heart {
+   padding-left: 160px;
+   width: 45px;
+   height: 45px;
+   padding-top: 15px;
+   object-fit: contain;
+   vertical-align: middle;
+}
+.communi {
+    width: 55px;
+    height: 55px;
+    padding-left: 20px;
+    padding-top: 15px;
+    object-fit: contain;
+    vertical-align: middle;
+ }
+
+@media screen and (max-width: 768px) {
+    .communi-box{
+        width: 50px;
+    }
+}
