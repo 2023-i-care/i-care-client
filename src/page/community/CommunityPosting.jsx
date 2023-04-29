@@ -3,7 +3,6 @@ import { useState } from 'react';
 import './CommunityPosting.module.css';
 import Group2 from '../../img/Group2.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button'; 
 const CommunityPosting = () => {
     
     return(
