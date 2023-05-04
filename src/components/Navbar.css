@@ -116,9 +116,9 @@ a {
 }
 .group {
     margin-left: -30px;
-    border-radius: 30px;
+    border-radius: 90px;
     border : none;
-    background-color: #FFF9E3;
+    background-color: transparent;
     
 }
 @media screen and (max-width: 768px) {

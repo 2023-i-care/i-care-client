@@ -1,25 +1,20 @@
 import React from 'react';
-import './TipPosting.css';
+import { useState } from 'react';
+import tippostincss from './TipPosting.module.css';
 import Group2 from '../../img/Group2.png';
 
 const TipPosting = () => {
 
     return(
         <div>
-            <table border={1}>
-                <thead>
-                    <tr>
-                    <th></th>
-                    <button className='group2'><img src={Group2} alt="group"/></button>
-                    </tr>
-                </thead>
-            </table>
-                <thead>
-                <textarea className='text' placeholder="내용을 입력하세요."></textarea>
-                </thead>
-                <button className='up'>올리기</button>
-            
-
+             
+             <div class="form-group">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder='제목 입력' style={{width:"100%" , marginBottom:"10px", marginTop:"30px"}}></input>
+            </div>
+            <div class="form-group">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder='내용 입력' style={{width:"100%" , marginBottom:"10px", height:"1000px", verticalAlign:"top"}}></input>
+            </div>
+            <button type="button" class="btn btn-outline-warning" style={{marginLeft:"300px"}}>등록</button>
            
         </div>
     )
