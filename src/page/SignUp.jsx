@@ -1,24 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const SignUp = () => {
-    const history = useHistory(); 
-
-    const handler = () => {
-        history.push('/community');
-    }
+const SignUp = (props) => {
+    const [name, setName] = useState("");
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
 
     return (
         <Container>
             <Title>Sign Up</Title>
             <Form>
-                <IdInput type='email' placeholder='이메일을 입력해주세요' />
-                <PwInput type='password' placeholder='비밀번호를 입력해주세요' />
-                <PwInput type='password' placeholder='비밀번호를 한 번 더 입력해주세요' />
-                <Button onClick={handler}>Sign Up</Button>
+                <NameInput 
+                    type='text'
+                    placeholder='닉네임을 입력해주세요'
+                    onChange={e => {
+                        setName(e.target.value);
+                    }}/>
+                <IdInput 
+                    type='email'
+                    placeholder='이메일을 입력해주세요'
+                    onChange={e => {
+                        setId(e.target.value);
+                    }}/>
+                <PwInput 
+                    type='password'
+                    placeholder='비밀번호를 입력해주세요'
+                    onChange={e => {
+                        setPassword(e.target.value);
+                    }}/>
+                <PwInput 
+                    type='password'
+                    placeholder='비밀번호를 한 번 더 입력해주세요'
+                    onChange={e => {
+                        setPassword2(e.target.value);
+                    }}/>
+                <Button 
+                    type="submit"
+                    onClick={() => {
+                        const userData = {
+                            userName: name,
+                            userId: id,
+                            userPassword: password,
+                            userPassword2: password2,
+                        };
+                        fetch("http://localhost:3001/signup", { //signup 주소에서 받을 예정
+                          method: "post", // method :통신방법
+                          headers: {      // headers: API 응답에 대한 정보를 담음
+                            "content-type": "application/json",
+                          },
+                          body: JSON.stringify(userData), //userData라는 객체를 보냄
+                        })
+                          .then(res => res.json())
+                          .then(json => {
+                            if(json.isSuccess === true){
+                              alert('회원가입이 완료되었습니다!');
+                              props.setMode("LOGIN");
+                            }
+                            else alert(json.isSuccess);
+                          });
+                    }}>Sign Up</Button>
             </Form>
-            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login">Login</SignUpBtn></Text>
+            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login" onClick={() => props.setMode("LOGIN")}>Login</SignUpBtn></Text>
         </Container>
     );
 }
@@ -33,7 +76,7 @@ const Container = styled.div`
 
 const Title = styled.div`
     width: 100vw;
-    padding-top: 160px;
+    padding-top: 100px;
     text-align: center;
     font-size: 50px;
     font-weight: bold;
@@ -47,9 +90,24 @@ const Form = styled.form`
     align-items: center;
 `;
 
-const IdInput = styled.input`
+const NameInput = styled.input`
     width: 400px;
     margin-top: 110px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #FDF3D1;
+    border: 0;
+    border-bottom: 1px solid #BDA470;
+    outline: none;
+
+    &::placeholder {
+        color: #A8884A;
+    }
+`;
+
+const IdInput = styled.input`
+    width: 400px;
+    margin-top: 60px;
     padding: 10px;
     font-size: 20px;
     background-color: #FDF3D1;

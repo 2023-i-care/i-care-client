@@ -10,9 +10,9 @@ const Community = ({match}) => {
         <Router>
             <Navbar/>
             <Switch>
-            <Route path={`${match.path}`} exact component={CommunityList} />
-            <Route path={`${match.path}/post`} component={CommunityPost} />
-            <Route path={`${match.path}/posting`} component={CommunityPosting} />
+                <Route path={`${match.path}`} exact component={CommunityList} />
+                <Route path={`${match.path}/post`} component={CommunityPost} />
+                <Route path={`${match.path}/posting`} component={CommunityPosting} />
             </Switch>
         </Router>
     );

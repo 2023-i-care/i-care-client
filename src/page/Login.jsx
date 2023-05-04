@@ -1,23 +1,51 @@
-import React from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import React, { useState }from "react";
 import styled from "styled-components";
 
-const Login = () => {
-    const history = useHistory();
-
-    const handler = () => {
-        history.push('/community');
-    }
+const Login = (props) => {
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <Container>
             <Title>Login</Title>
             <Form>
-                <IdInput type='email' placeholder='이메일을 입력해주세요' />
-                <PwInput type='password' placeholder='비밀번호를 입력해주세요' />
-                <Button onClick={handler}>Login</Button>
+                <IdInput 
+                    type='email' 
+                    name="email"
+                    placeholder='이메일을 입력해주세요'
+                    onChange={e => {
+                        setId(e.target.value);
+                    }}/>
+                <PwInput 
+                    type='password'
+                    name="password"
+                    placeholder='비밀번호를 입력해주세요'
+                    onChange={e => {
+                        setPassword(e.target.value);
+                    }}/>
+                <Button 
+                    type="submit"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const userData = {
+                            userId: id,
+                            userPassword: password,
+                        };
+                        fetch("http://localhost:3001/login", { //auth 주소에서 받을 예정
+                        method: "post", // method :통신방법
+                        headers: {      // headers: API 응답에 대한 정보를 담음
+                            "content-type": "application/json",
+                        },
+                        body: JSON.stringify(userData), //userData라는 객체를 보냄
+                        })
+                        .then(res => res.json())
+                        .then(json => {  
+                            if(json.isLogin === true) props.setMode("WELCOME");
+                            else alert(json.isLogin);
+                        });
+                    }}>Login</Button>
             </Form>
-            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup">Sign Up</SignUpBtn></Text>
+            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup" onClick={() => props.setMode("SIGNUP")}>Sign Up</SignUpBtn></Text>
         </Container>
     );
 }

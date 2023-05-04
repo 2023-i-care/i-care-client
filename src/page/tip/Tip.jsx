@@ -10,9 +10,9 @@ const Tip = ({match}) => {
         <Router>
             <Navbar/>
             <Switch>
-            <Route path={`${match.path}`} exact component={TipList} />
-            <Route path={`${match.path}/post`} component={TipPost} />
-            <Route path={`${match.path}/posting`} component={TipPosting} />
+                <Route path={`${match.path}`} exact component={TipList} />
+                <Route path={`${match.path}/post`} component={TipPost} />
+                <Route path={`${match.path}/posting`} component={TipPosting} />
             </Switch>
         </Router>
     );

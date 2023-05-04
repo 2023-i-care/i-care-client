@@ -10,9 +10,9 @@ const Diary = ({match}) => {
         <Router>
             <Navbar/>
             <Switch>
-            <Route path={`${match.path}`} exact component={DiaryList} />
-            <Route path={`${match.path}/post`} component={DiaryPost} />
-            <Route path={`${match.path}/posting`} component={DiaryPosting} />
+                <Route path={`${match.path}`} exact component={DiaryList} />
+                <Route path={`${match.path}/post`} component={DiaryPost} />
+                <Route path={`${match.path}/posting`} component={DiaryPosting} />
             </Switch>
         </Router>
     );

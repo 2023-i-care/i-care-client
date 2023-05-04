@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import tippostincss from './TipPosting.module.css';
 import Group2 from '../../img/Group2.png';
+
 const TipPosting = () => {
 
     return(
