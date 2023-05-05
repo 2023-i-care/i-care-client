@@ -1,3 +1,6 @@
+import Login from "@/pages/login";
+import MyPage from "@/pages/mypage";
+import SignUp from "@/pages/signup";
 import React, { useContext, useState } from "react";
 
 export const UserContext = React.createContext("");
@@ -12,7 +15,9 @@ export const UserProvider = () => {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      {props.Reactchildren}
+      <Login/>
+      <SignUp/>
+      <MyPage/>
     </UserContext.Provider>
   );
 };

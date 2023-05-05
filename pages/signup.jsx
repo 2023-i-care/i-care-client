@@ -4,7 +4,6 @@ import { ModeContext } from ".";
 import axios from 'axios';
 
 const SignUp = () => {
-    const setMode = useContext(ModeContext);
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -56,7 +55,7 @@ const SignUp = () => {
                             });
                     }}>Sign Up</Button>
             </Form>
-            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login" onClick={() => props.setMode("LOGIN")}>Login</SignUpBtn></Text>
+            <Text>회원가입이 되어있으신가요?  <SignUpBtn href="/login">Login</SignUpBtn></Text>
         </Container>
     );
 }
