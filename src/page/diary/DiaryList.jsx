@@ -4,9 +4,9 @@ import "./DiaryList.css";
 const DiaryList = () => {
   return (
     <div>
-      <button className="btn" href="/diary/diaryposting">
-        <p className="btntext">우리 아기의 이야기를 기록해보세요</p>
-      </button>
+      <div className="img">
+        <img className="babyimg" src="img/baby.jpg" />
+      </div>
       <div className="box">
         <p className="diary">
           오늘은 설윤이가 밥도 맛있게 먹고 처음으로 엄마라고 말도 했다!
