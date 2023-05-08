@@ -1,11 +1,19 @@
 .p {
-    margin-right: 20px;
-    margin-left: 20px;
-    color: #DBBB7D;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #dbbb7d;
+}
+
+.p2 {
+  margin-left: 700px;
+  color: #dbbb7d;
 }
 
 .hr {
-    margin-right: 20px;
-    margin-left: 20px;
-    color: #FDEBC7;
+  margin-right: 20px;
+  margin-left: 20px;
+  color: #fdebc7;
+}
+.img {
+  width: 50px;
 }
