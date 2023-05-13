@@ -30,25 +30,25 @@ const CommunityList = () => {
           <td>6</td>
         </tr>
         <tr className="tr">
-          <td>2</td>
+          <img className="img" src={img} />
           <td>두번째 게시글입니다.</td>
           <td>2020-10-25</td>
           <td>5</td>
         </tr>
         <tr className="tr">
-          <td>3</td>
+          <img className="img" src={img} />
           <td>세번째 게시글입니다.</td>
           <td>2020-10-25</td>
           <td>1</td>
         </tr>
         <tr className="tr">
-          <td>4</td>
+          <img className="img" src={img} />
           <td>네번째 게시글입니다.</td>
           <td>2020-10-25</td>
           <td>2</td>
         </tr>
         <tr className="tr">
-          <td>5</td>
+          <img className="img" src={img} />
           <td>다섯번째 게시글입니다.</td>
           <td>2020-10-25</td>
           <td>4</td>

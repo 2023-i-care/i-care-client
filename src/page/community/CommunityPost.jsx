@@ -3,7 +3,11 @@ import styled from "styled-components";
 
 const CommunityPost = () => {
     return (
-        <h1>소통 글 보기 페이지입니다.</h1>
+        <div>
+            <label for="content">내용</label>
+            <textarea class="form-control" rows="5" id="content"
+                name="content" placeholder="내용 작성"></textarea>
+        </div>
     );
 }
 

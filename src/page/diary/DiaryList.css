@@ -20,9 +20,32 @@
 }
 
 .diary {
-  color: #99937f;
+  color: #DBBB7D;
   font-size: 13px;
   margin-right: auto;
   margin-left: 20px;
-  margin-top: 50px;
+
+}
+
+.title {
+  color: #DBBB7D;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#btn {
+  margin-left: 1270px;
+  margin-bottom: 50px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #F6D697;
+}
+
+.img {
+  margin: 25px;
+  width: 200px;
+  height: 150px;
+  border-radius: 15%;
 }
