@@ -1,24 +1,61 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
-import styles from '../styles/Community.module.css'
+import "@/communityList.css";
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import styled from "styled-components";
+import img from "../../img/baby.jpg";
 
 const CommunityList = () => {
-    const [isClick, setIsClick] = useState(false);
-    const click_heart = () => {
-        setIsClick(!isClick);
-    }
-   
-    return (
-        <div>
-            <Navbar />
-            <a className={`${styles.postingBtn}`} href="/community/posting">당신의 이야기를 들려주세요</a>
-            <div className={`${styles.communi_box}`}>
-                산후 우울증에 대해...      
-                <input type="text" className={`${styles.communi}`} placeholder='따뜻한 말 한마디 해주세요'></input>
-                <img src={isClick? "pink_heart.png" : "heart.png"} alt='img' onClick={click_heart} className={`${styles.heart}`}/>               
-            </div>
-        </div>
-    );
-};
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isClick, setIsClick] = useState(false);
 
+  const click_heart = () => {
+    setIsClick(!isClick);
+  };
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr className="tr">
+            <th>제목</th>
+            <th>등록일</th>
+            <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="tr">
+            <img className="img" src={img} />
+            <td>첫번째 게시글입니다.</td>
+            <td>2020-10-25</td>
+            <td>6</td>
+          </tr>
+          <tr className="tr">
+            <img className="img" src={img} />
+            <td>두번째 게시글입니다.</td>
+            <td>2020-10-25</td>
+            <td>5</td>
+          </tr>
+          <tr className="tr">
+            <img className="img" src={img} />
+            <td>세번째 게시글입니다.</td>
+            <td>2020-10-25</td>
+            <td>1</td>
+          </tr>
+          <tr className="tr">
+            <img className="img" src={img} />
+            <td>네번째 게시글입니다.</td>
+            <td>2020-10-25</td>
+            <td>2</td>
+          </tr>
+          <tr className="tr">
+            <img className="img" src={img} />
+            <td>다섯번째 게시글입니다.</td>
+            <td>2020-10-25</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 export default CommunityList;
