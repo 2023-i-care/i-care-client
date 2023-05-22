@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../Navbar";
+import styles from "../../styles/CommunityPost.module.css";
 
 const CommunityPost = () => {
     return (
-        <div>
-            <Navbar />
-            <h1>소통 글 보기 페이지입니다.</h1>
-        </div>
+        <>
+            <h1>소통 글</h1>
+        </>
     );
 }
 
