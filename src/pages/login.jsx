@@ -49,7 +49,7 @@ const Login = () => {
                             });
                     }}>Login</Button>
             </Form>
-            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup">Sign Up</SignUpBtn></Text>
+            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup" onClick={() => props.setMode("SIGNUP")}>Sign Up</SignUpBtn></Text>
         </Container>
     );
 }

@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../Navbar";
+import styles from "../../styles/DiaryPosting.module.css";
 
 const DiaryPosting = () => {
   return (
-    <div>
-      <Navbar />
-      <h1>일기 글 작성 페이지입니다.</h1> 
-    </div>
+    <>
+      <h1>다이어리 작성</h1>
+    </>
   );
 };
 

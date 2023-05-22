@@ -1,13 +1,11 @@
 import React from "react";
-import Navbar from "../Navbar";
-import styles from "../../styles/DiaryPost.module.css";
+import styles from "../../styles/Diarypost.module.css";
 
 const DiaryPost = () => {
   return (
-    <div>
-      <Navbar />
-      <div className={`${styles.diary}`}></div>
-    </div>
+    <>
+      <h1>다이어리 글</h1>
+    </>
   );
 };
 
