@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 920px;
+    margin: 0 auto;
+}
+
+.diary_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 860px;
+    height: 200px;
+    margin-top: 60px;
+    padding: 30px;
+    background-color: #FFF9E3;
+    border-radius: 20px;
+}
+
+.content_container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    height: 130px;
+}
+
+.title {
+    font-size: 20px;
+    color: #DBBB7D;
+    font-weight: bold;
+}
+
+.content {
+    font-size: 16px;
+    color: #DBBB7D;
+}
+
+.image {
+    background-image: url('../../public/images/diary_img.jpg');
+    background-size: cover;
+    width: 210px;
+    height: 150px;
+    border-radius: 20px;
+}
