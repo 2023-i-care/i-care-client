@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.profile_container {
+    display: flex;
+    column-gap: 40px;
+    width: 920px;
+}
+
+.info_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.text {
+    font-size: 18px;
+    color: #DBBB7D;
+}
+
+.btn_container {
+    display: flex;
+    column-gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    width: 90px;
+    height: 30px;
+    background-color: #F6D697;
+    border: 0;
+    color: white;
+    border-radius: 8px;
+}
+
+.favorites_container {
+    width: 920px;
+    margin-top: 68px;
+}
+
+.title {
+    font-size: 18px;
+    color: #DBBB7D;
+}
+
+.content_container {
+    height: 600px;
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #FFF9E3;
+    border-radius: 20px;
+}

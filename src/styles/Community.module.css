@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    width: 920px;
+    margin:  0 auto;
+    margin-top: 60px;
+}
+
+.gen_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 40px;
+    background-color: #F6D697;
+    color: white;
+    border-radius: 8px;
+    border: 0;
+}
+
+.table {
+    width: 920px;
+    margin-top: 10px;
+    border-top: 1px solid #DBBB7D;
+    border-collapse: collapse;
+}
+  
+.th, .td {
+    border-bottom: 1px solid #DBBB7D;
+    padding: 10px;
+}
+
+.post {
+    cursor: pointer;
+}
