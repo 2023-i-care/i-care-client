@@ -24,7 +24,7 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr className={styles.tr}>
+            <tr className={styles.post} onClick={() => location.href = 'community/post'}>
               <td className={styles.td}><img src='/images/image.png'/></td>
               <td className={styles.td}>아휴 힘들다</td>
               <td className={styles.td}>hyennin</td>

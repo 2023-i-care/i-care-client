@@ -30,3 +30,7 @@
     border-bottom: 1px solid #DBBB7D;
     padding: 10px;
 }
+
+.post {
+    cursor: pointer;
+}
