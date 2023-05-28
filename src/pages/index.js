@@ -1,8 +1,42 @@
 import Navbar from '@/components/Navbar';
 import React from 'react';
 import styles from "@/styles/Community.module.css";
+import db from '../net/db';
+import {collection, getDocs, orderBy, query, onSnapshot} from 'firebase/firestore';
+import { useEffect,useState } from 'react';
+import {DateTime} from 'luxon';
+import Link from 'next/link';
+
 
 export default function Home() {
+  const [list,setList]  = useState([]);
+  useEffect(() => {
+    onSnapshot(query(collection(db,'articles'),orderBy('created_at','desc')), results => {
+        const newList = [];
+       results.forEach(doc => {
+         const data = doc.data();
+         data.id = doc.id;
+         newList.push(data);
+         console.log(doc.id);
+         console.log(doc.data());
+         console.log('------');
+       });
+       setList(newList)
+    })
+    // getDocs(query(collection(db,'articles'),orderBy('created_at','desc')))
+    //   .then(results => {
+    //     const newList = [];
+    //    results.forEach(doc => {
+    //      const data = doc.data();
+    //      data.id = doc.id;
+    //      newList.push(data);
+    //      console.log(doc.id);
+    //      console.log(doc.data());
+    //      console.log('------');
+    //    });
+    //    setList(newList)
+    //   })
+  },[]);
   return (
     <>
       <Navbar/>
@@ -23,14 +57,17 @@ export default function Home() {
               <th className={styles.th}>작성일</th>
             </tr>
           </thead>
-          <tbody>
-            <tr className={styles.post} onClick={() => location.href = 'community/post'}>
-              <td className={styles.td}><img src='/images/image.png'/></td>
-              <td className={styles.td}>아휴 힘들다</td>
-              <td className={styles.td}>hyennin</td>
-              <td className={styles.td}>2023.05.22</td>
-            </tr>
-          </tbody>
+          {list.map(item => (
+              <tbody>
+              <tr key={item.id} className={styles.post} onClick={() => location.href = `community/articles/${item.id}`}>
+                <td className={styles.td}><img src='/images/image.png'/></td>
+                <td className={styles.td}>{item.subject}</td>
+                <td className={styles.td}>{item.author}</td>
+                <td className={styles.td}>{DateTime.fromMillis(item.created_at).toFormat('yyyy-LL-dd HH:mm:ss')}</td>
+              </tr>
+            </tbody>
+            ))}
+          
         </table>
       </div>
     </>
