@@ -1,14 +1,15 @@
 import Navbar from "@/components/Navbar";
-import db from "../../../../net/db";
+import db from "@/net/db";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React,{ useEffect, useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import styles from "../../../../styles/CommunityPost.module.css";
 
 export default function Article() {
     const router = useRouter();
-    const [subject, setSubject] = useState();
-    const [content, setContent] = useState();
+    const [subject, setSubject] = useState('');
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         getDoc(doc(db, 'articles', router.query.id))
@@ -22,8 +23,8 @@ export default function Article() {
     return (
             <>
             <Navbar/>
-            <h1 className={styles.title}>제목</h1>
-            <p className={styles.content}>내용</p>
+            <h1 className={styles.title}>{subject}</h1>
+            <p className={styles.content}>{content}</p>
             
         </>
     )
