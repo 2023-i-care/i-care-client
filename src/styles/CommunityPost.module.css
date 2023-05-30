@@ -7,3 +7,23 @@
     margin-top: 50px;
     margin-left: 100px;
 }
+.comments{
+    width: 900px;
+    border: none;
+    height: 100px;
+    margin-left: 300px;
+    margin-top: 300px;
+}
+.post_btn {
+    border: none;
+    background-color: antiquewhite;
+    height: 50px;
+    width: 95px;
+}
+.td {
+    margin-left: 400px;
+}
+.hr {
+    width: 500px;
+    margin-left: 400px;
+}

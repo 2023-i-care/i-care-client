@@ -4,7 +4,7 @@ import styles from "../../styles/CommunityPosting.module.css";
 import {collection,addDoc} from 'firebase/firestore';
 import db from '../../net/db';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react/cjs/react.production.min';
+import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import auth from '@/net/auth';
 
@@ -17,7 +17,7 @@ const CommunityPosting = () => {
 		await addDoc(collection(db, 'articles'), {
 			subject,
 			content,
-			author : user.email,
+			author : '김비야',
 			created_at : new Date().getTime(),
 		})
 		alert('저장 되었습니다');
