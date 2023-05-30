@@ -12,13 +12,20 @@ export default function Article() {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        getDoc(doc(db, 'articles', router.query.id))
-        .then(doc => {
-            const data = doc.data();
+        const fetchData = async () => {
+          try {
+            const docRef = doc(db, 'articles', router.query.id);
+            const docSnap = await getDoc(docRef);
+            const data = docSnap.data();
             setSubject(data.subject);
             setContent(data.content);
-        })
-    },[])
+          } catch (error) {
+            // 에러 처리
+          }
+        };
+    
+        fetchData();
+      }, [router.query.id]);
 
     return (
             <>
