@@ -17,7 +17,7 @@ const CommunityPosting = () => {
 		await addDoc(collection(db, 'articles'), {
 			subject,
 			content,
-			author : '김비야',
+			author : user.email,
 			created_at : new Date().getTime(),
 		})
 		alert('저장 되었습니다');

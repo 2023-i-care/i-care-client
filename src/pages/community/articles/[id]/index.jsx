@@ -29,7 +29,8 @@ export default function Article() {
         fetchData();
       }, [router.query.id]);
 
-      const submit = async() => {
+    //댓글 기능
+    const submit = async() => {
 		await addDoc(collection(db, 'articles2'), {
 			comment,
 		})
