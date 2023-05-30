@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useUser } from "@/context/UserContext";
+import { SetUserContext, UserContext, useUser } from "@/context/UserContext";
 
 const Login = () => {
     const router = useRouter();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
-    const {user, setUser} = useUser();
+    const setUser = useContext(SetUserContext);
+    const user = useContext(UserContext);
 
     return (
         <Container>
@@ -32,18 +33,11 @@ const Login = () => {
                     type="submit"
                     onClick={(e) => {
                         e.preventDefault();
-                        axios.post("http://localhost:3001/login", {
-                            userId: id,
-                            userPassword: password
-                        })
+                        axios.post("http://localhost:3001/login")
                             .then(res => {  
                                 if(res.data.isLogin === true) {
-                                    setUser({
-                                        ...user,
-                                        nickname: "hi",
-                                        id: "bye"
-                                    });
-                                    router.push("/community")
+                                    console.log(res.data.id, res.data.isLogin);
+                                    router.push("/")
                                 }
                                 else alert(res.data.message);
                             });
