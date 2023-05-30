@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { ModeContext } from ".";
 import axios from 'axios';
+import { useRouter } from "next/router";
 
 const SignUp = () => {
-    const setMode = useContext(ModeContext);
+    const router = useRouter();
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -50,7 +50,7 @@ const SignUp = () => {
                             .then(res => {
                                 if(res.isSuccess === true){
                                 alert('회원가입이 완료되었습니다!');
-                                setMode("LOGIN");
+                                    router.push("/login");
                                 }
                                 else alert(res.message);
                             });
