@@ -1,0 +1,62 @@
+.Container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FDF3D1;
+}
+.Title{
+    width: 100vw;
+    padding-top: 160px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #F6D697;
+}
+.Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.IdInput {
+    width: 400px;
+    margin-top: 110px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #FDF3D1;
+    border: 0;
+    border-bottom: 1px solid #BDA470;
+    outline: none;
+}
+.PwInput {
+    width: 400px;
+    margin-top: 70px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #FDF3D1;
+    border: 0;
+    border-bottom: 1px solid #BDA470;
+    outline: none;
+}
+.Button {
+    width: 330px;
+    height: 70px;
+    margin-top: 80px;
+    font-size: 32px;
+    color: white;
+    background-color: #F6D697;
+    border: 0;
+    box-shadow: 0px 4px 4px lightgray;
+}
+.Text {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    color: #BDA470;
+}
+.SignUpBtn{
+    font-size: 24px;
+    color: #F6D697;
+    border: none;
+    background-color:#FDF3D1;
+}

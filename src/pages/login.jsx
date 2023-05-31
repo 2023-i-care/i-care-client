@@ -1,127 +1,49 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
-import axios from "axios";
+import React, { useState } from "react";
+import styles from "../styles/Login.module.css";
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import auth from '../net/auth';
 import { useRouter } from "next/router";
-import { SetUserContext, UserContext, useUser } from "@/context/UserContext";
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const router = useRouter();
-    const [id, setId] = useState("");
-    const [password, setPassword] = useState("");
-    const setUser = useContext(SetUserContext);
-    const user = useContext(UserContext);
+    const submit = () => {
+        console.log({email,password});
+        signInWithEmailAndPassword(auth, email,password).then(res => {
+            console.log(res);
+            router.push('/');
+        })
+        .catch(error => {
+            console.warn(error)
+            alert("로그인에 실패했습니다")
+        });
+    }
+    const signUp = () => {
+        router.push('/signup');
+    }
 
     return (
-        <Container>
-            <Title>Login</Title>
-            <Form>
-                <IdInput 
+        <div className={styles.Container}>
+            <h1 className={styles.Title}>Login</h1>
+            <div className={styles.Form}>
+            <input className={styles.IdInput}
                     type='email' 
-                    name="email"
-                    placeholder='이메일을 입력해주세요'
-                    onChange={e => {
-                        setId(e.target.value);
-                    }}/>
-                <PwInput 
-                    type='password'
-                    name="password"
-                    placeholder='비밀번호를 입력해주세요'
-                    onChange={e => {
-                        setPassword(e.target.value);
-                    }}/>
-                <Button 
-                    type="submit"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        axios.post("http://localhost:3001/login")
-                            .then(res => {  
-                                if(res.data.isLogin === true) {
-                                    console.log(res.data.id, res.data.isLogin);
-                                    router.push("/")
-                                }
-                                else alert(res.data.message);
-                            });
-                    }}>Login</Button>
-            </Form>
-            <Text>아이디가 없으신가요?  <SignUpBtn href="/signup" onClick={() => props.setMode("SIGNUP")}>Sign Up</SignUpBtn></Text>
-        </Container>
+                    placeholder="이메일을 입력하시오"
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
+                />
+                <input className={styles.PwInput} 
+                    type="password"
+                    placeholder="비밀번호를 입력하시오"
+                    value={password}
+                    onChange={event => setPassword(event.target.value)}
+                />
+                <button className={styles.Button} onClick={submit}>로그인</button>
+            </div>
+            <p className={styles.Text}>아이디가 없으신가요?  <button className={styles.SignUpBtn} onClick={signUp}>Sign Up</button></p>
+        </div>
     );
 }
-
-const Container = styled.div`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FDF3D1;
-`;
-
-const Title = styled.div`
-    width: 100vw;
-    padding-top: 160px;
-    text-align: center;
-    font-size: 50px;
-    font-weight: bold;
-    color: #F6D697;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-const IdInput = styled.input`
-    width: 400px;
-    margin-top: 110px;
-    padding: 10px;
-    font-size: 20px;
-    background-color: #FDF3D1;
-    border: 0;
-    border-bottom: 1px solid #BDA470;
-    outline: none;
-
-    &::placeholder {
-        color: #A8884A;
-    }
-`;
-
-const PwInput = styled.input`
-    width: 400px;
-    margin-top: 70px;
-    padding: 10px;
-    font-size: 20px;
-    background-color: #FDF3D1;
-    border: 0;
-    border-bottom: 1px solid #BDA470;
-    outline: none;
-
-    &::placeholder {
-        color: #A8884A;
-    }
-`;
-
-const Button = styled.button`
-    width: 330px;
-    height: 70px;
-    margin-top: 80px;
-    font-size: 32px;
-    color: white;
-    background-color: #F6D697;
-    border: 0;
-    box-shadow: 0px 4px 4px lightgray;
-`;
-
-const Text = styled.div`
-    margin-top: 10px;
-    white-space: pre-wrap;
-    color: #BDA470;
-`;
-
-const SignUpBtn = styled.a`
-    font-size: 24px;
-    color: #F6D697;
-`;
 
 export default Login;
