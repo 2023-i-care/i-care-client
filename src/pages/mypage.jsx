@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
+import { SetUserContext, UserContext } from "@/context/UserContext";
+import axios from "axios";
 
 const MyPage = () => {
+  const user = useContext(UserContext);
+  const setUser = useContext(SetUserContext);
+  // axios.get("http://localhost:3001/signup")
+  //   .then((req) => {
+  //     setUser((prevState) => {
+  //       return {...prevState, id: req.id, name: req.name}
+  //     });
+  //   });
+
   return (
     <>
       <Navbar/>
@@ -10,8 +21,8 @@ const MyPage = () => {
         <div className={styles.profile_container}>
           <img src="/images/profile.png"/>
           <div className={styles.info_container}>
-            <div className={styles.text}>닉네임 : hello</div>
-            <div className={styles.text}>아이디 : hi</div>
+            <div className={styles.text}>닉네임 : {user.name}</div>
+            <div className={styles.text}>아이디 : {user.id}</div>
             <div className={styles.btn_container}>
               <button className={styles.btn}>정보수정</button>
               <button className={styles.btn}>저장</button>
