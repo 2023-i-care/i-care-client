@@ -8,7 +8,6 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
-
     const submit = () => {
         console.log({email,password});
         signInWithEmailAndPassword(auth, email,password).then(res => {
@@ -44,7 +43,6 @@ const Login = () => {
             </div>
             <p className={styles.Text}>아이디가 없으신가요?  <button className={styles.SignUpBtn} onClick={signUp}>Sign Up</button></p>
         </div>
-            
     );
 }
 
