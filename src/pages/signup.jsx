@@ -21,7 +21,7 @@ const SignUp = () => {
             <h1 className={styles.Title}>회원가입</h1>
             <div className={styles.Form}>
             <input className={styles.Email} 
-                type="email"
+                type="email"    
                 placeholder="이메일을 입력하시오"
                 value={email}
                 onChange = {event => setEmail(event.target.value)}
