@@ -30,16 +30,15 @@ export default function Article() {
       }, [router.query.id]);
 
     //댓글 기능
-    const submit = async() => {
-		await addDoc(collection(db, 'articles2'), {
-			comment,
-		})
-		alert('저장 되었습니다');
-		setComment('');
-		router.push('community/articles/[id]');
-		//history.back();
-		
-	}
+    const submit = async () => {
+      await addDoc(collection(db, "articles2"), {
+        comment,
+      });
+      alert("저장 되었습니다");
+      setComment("");
+      router.push(`/community/articles/${router.query.id}`);
+      //history.back();
+    };
     useEffect(() => {
       onSnapshot(query(collection(db,'articles2')), results => {
           const newList = [];
