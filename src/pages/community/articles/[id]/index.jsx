@@ -63,27 +63,29 @@ export default function Article() {
     }
   }, [router.query.id]);
 
-    return (
-        <div>
-            <Navbar/>
-            <div className={styles.post}>
-            <h1 className={styles.title}>{subject}</h1>
-            <p className={styles.content}>{content}</p>
-            </div>
-            <div className={styles.Comments}>
-            <textarea className={styles.comments} type='text' placeholder="댓글을 입력하세요" 
-			value={comment} onChange= {event => setComment(event.target.value)}/>
-
-            <button className={styles.post_btn} onClick={submit}>등록하기</button>
-            </div>
-            {list.map(item => (
-            <div key={item.id} className={styles.comment2}>
-                <p className={styles.td}>{item.comment}</p>
-                <hr className={styles.hr}/>
-            </div>
-            ))}
-            
-            
+  return (
+    <div>
+      <Navbar />
+      <div className={styles.postContainer}>
+        <div className={styles.post}>
+          <h1 className={styles.title}>{subject}</h1>
+          <hr className={styles.divider} />
+          <p className={styles.content}>{content}</p>
         </div>
-    )
+      </div>
+      <div className={styles.commentsContainer}>
+        <textarea className={styles.commentsInput} type='text' placeholder="댓글을 입력하세요"
+          value={comment} onChange={event => setComment(event.target.value)} />
+        <button className={styles.submitBtn} onClick={submit}>등록하기</button>
+      </div>
+      <div className={styles.commentsList}>
+        {list.map(item => (
+          <div key={item.id} className={styles.commentContainer}>
+            <p className={styles.commentText}>{item.comment}</p>
+            <hr className={styles.commentHr} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
