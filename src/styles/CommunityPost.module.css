@@ -1,78 +1,78 @@
 .postContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 제목 내용 박스 */
 .post {
-    margin-top: 30px;
-    border-radius: 10px;
-    width: 900px;
-    padding: 20px;
-    background-color: #fff9e3;
+  margin-top: 30px;
+  border-radius: 10px;
+  width: 900px;
+  padding: 20px;
+  background-color: #fff9e3;
 }
 
 .title {
-    color: #dbbb7d;
-    font-size: 30px;
-    margin-bottom: 10px;
+  color: #dbbb7d;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 /* 제목 내용 사이의 선 */
 .divider {
-    margin: 10px 0;
-    border: none;
-    border-top: 2px solid #fffbee(226, 226, 226);
+  margin: 10px 0;
+  border: none;
+  border-top: 2px solid #fffbee(226, 226, 226);
 }
 
 .content {
-    color: #dbbb7d;
-    margin-top: 10px;
+  color: #dbbb7d;
+  margin-top: 10px;
 }
 
 .commentsContainer {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
 }
 
 /* 댓글 입력하는 곳 */
 .commentsInput {
-    margin-left: 405px;
-    width: 900px;
-    height: 100px;
-    padding: 10px;
-    border: 1px solid #fff9e3;
+  margin-left: 510px;
+  width: 900px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #fff9e3;
 }
 
 .submitBtn {
-    border-radius: 10px;
-    margin-left: 10px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #f6d697;
-    color: white;
-    cursor: pointer;
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #f6d697;
+  color: white;
+  cursor: pointer;
 }
 
 .commentsList {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .commentContainer {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .commentText {
-    padding: 10px;
-    color: #dbbb7d;
-    margin-left: 420px;
+  margin-left: 530px;
+  padding: 10px;
+  color: #dbbb7d;
 }
 
 .commentHr {
-    margin: 10px auto;
-    border: none;
-    border-top: 2px solid #fff9e3;
-    width: 50%;
+  margin: 10px auto;
+  border: none;
+  border-top: 2px solid #fff9e3;
+  width: 45%;
 }
