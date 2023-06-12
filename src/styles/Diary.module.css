@@ -6,6 +6,21 @@
     margin: 0 auto;
 }
 
+.gen_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 40px;
+    background-color: #F6D697;
+    color: white;
+    border-radius: 8px;
+    border: 0;
+    margin-left: 1070px;
+    margin-top: 20px;
+    position: absolute;
+}
+
 .diary_box {
     display: flex;
     justify-content: space-between;
