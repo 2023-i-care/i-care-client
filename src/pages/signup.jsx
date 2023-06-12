@@ -36,7 +36,7 @@ const SignUp = () => {
                 onClick={submit}
                 >회원가입</button>
             </div>
-            <p className={styles.Text}>회원가입이 되어있으신가요?  <button className={styles.SignUpBtn} href="/login" onClick={() => props.setMode("LOGIN")}>Login</button></p>
+            <p className={styles.Text}>회원가입이 되어있으신가요?  <button className={styles.SignUpBtn} href="/login" onClick={SignUp}>Login</button></p>
         </div>
     );
 }
