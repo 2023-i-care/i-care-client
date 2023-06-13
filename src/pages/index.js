@@ -57,17 +57,16 @@ export default function Home() {
               <th className={styles.th}>작성일</th>
             </tr>
           </thead>
+          <tbody>
           {list.map(item => (
-              <tbody>
               <tr key={item.id} className={styles.post} onClick={() => location.href = `community/articles/${item.id}`}>
                 <td className={styles.td}><img src='/images/image.png'/></td>
                 <td className={styles.td}>{item.subject}</td>
                 <td className={styles.td}>{item.author}</td>
-                <td className={styles.td}>{DateTime.fromMillis(item.created_at).toFormat('yyyy-LL-dd HH:mm:ss')}</td>
+                <td className={styles.td}>{DateTime.fromMillis(item.created_at).toFormat('yy-LL-dd HH:mm')}</td>
               </tr>
-            </tbody>
             ))}
-          
+          </tbody>
         </table>
       </div>
     </>
