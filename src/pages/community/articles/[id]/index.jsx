@@ -34,7 +34,7 @@ export default function Article() {
       articleId: router.query.id,
       comment,
     });
-    alert("등록되었습니다");
+    alert("댓글이 등록되었습니다");
     setComment("");
     router.push(`/community/articles/${router.query.id}`);
     //history.back();

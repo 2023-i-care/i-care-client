@@ -39,15 +39,19 @@
 .comment {
   display: flex;
   flex-direction: column;
+  width: 300px;
+  height: 731px;
+  background-color: #FFF9E3;
+  border-radius: 20px;
+  margin-top: 124px;
 }
 
 .commentsContainer {
-  position: absolute;
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-top: 19px;
-  top: 840px;
-  margin-left: 12px;
+  margin-bottom: 10px;
 }
 
 /* 댓글 입력하는 곳 */
@@ -61,19 +65,20 @@
 }
 
 .submitBtn {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
   border: none;
   background-color: #f6d697;
   color: white;
+  margin-left: 6px;
   cursor: pointer;
 }
 
 .commentsList {
-  margin-top: 124px;
+  margin-top: 20px;
   width: 287px;
-  height: 731px;
+  height: 730px;
   background-color: #FFF9E3;
   border-radius: 20px;
 }

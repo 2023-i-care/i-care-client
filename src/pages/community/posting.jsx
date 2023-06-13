@@ -20,7 +20,7 @@ const CommunityPosting = () => {
 			author : user.email,
 			created_at : new Date().getTime(),
 		})
-		alert('저장 되었습니다');
+		alert('게시글이 등록되었습니다');
 		setSubject('');
 		setContent('');
 		router.push('/');

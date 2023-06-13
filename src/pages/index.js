@@ -37,6 +37,17 @@ export default function Home() {
     //    setList(newList)
     //   })
   },[]);
+
+  const formatDate = (timestamp) => {
+    const date = DateTime.fromMillis(timestamp);
+    const today = DateTime.local().startOf('day');
+    if (date >= today) {
+      return date.toFormat('HH:mm');
+    } else {
+      return date.toFormat('yy-LL-dd');
+    }
+  };
+
   return (
     <>
       <Navbar/>
@@ -63,7 +74,7 @@ export default function Home() {
                 <td className={styles.td}><img src='/images/image.png'/></td>
                 <td className={styles.td}>{item.subject}</td>
                 <td className={styles.td}>{item.author}</td>
-                <td className={styles.td}>{DateTime.fromMillis(item.created_at).toFormat('yy-LL-dd HH:mm')}</td>
+                <td className={styles.td}>{formatDate(item.created_at)}</td>
               </tr>
             ))}
           </tbody>
