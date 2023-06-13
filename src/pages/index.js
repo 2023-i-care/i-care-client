@@ -17,9 +17,9 @@ export default function Home() {
          const data = doc.data();
          data.id = doc.id;
          newList.push(data);
-         console.log(doc.id);
-         console.log(doc.data());
-         console.log('------');
+        //  console.log(doc.id);
+        //  console.log(doc.data());
+        //  console.log('------');
        });
        setList(newList)
     })
@@ -48,11 +48,43 @@ export default function Home() {
     }
   };
 
+  // 검색  
+  const [userInput, setUserInput] = useState('');
+  const [clicked, setClicked] = useState(false);
+
+  // 입력값을 가져와서 소문자로변경
+  const getValue = (e) => {
+  setUserInput(e.target.value.toLowerCase())};
+
+  // 데이터들을 배열로 posts 에 배열 state로 담아준 상태
+  const [posts, setPosts] = useState([]);
+
+  setPosts((prev) => {
+    list.map((item, idx) => {
+      prev[idx] = item.subject
+    })
+  });
+
+  // 데이터 목록중, name에 사용자 입력값이 있는 데이터만 불러오기
+  // 사용자 입력값을 소문자로 변경해주었기 때문에 데이터도 소문자로
+  const searched = posts.filter((item) =>
+    item.subject.toLowerCase().includes(userInput)
+  );
+
+  console.log("s: ", searched);
+  console.log("p: ", posts)
+
   return (
     <>
       <Navbar/>
       <div className={styles.container}>
-        <div className={styles.gen_btn}><a href='/community/posting'>글쓰기</a></div>
+        <div className={styles.top_container}>
+          <div className={styles.search_container}>
+            <input className={styles.search_box} onChange={getValue}/>
+            <img className={styles.search_icon} src="/images/search.png" onClick={() => setClicked(true)}/>
+          </div>
+          <div className={styles.gen_btn}><a href='/community/posting'>글쓰기</a></div>
+        </div>
         <table className={styles.table}>
           <colgroup>
             <col style={{width: "10%"}}/>
@@ -69,14 +101,25 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-          {list.map(item => (
+            {clicked ? 
+            searched.map(item => (
               <tr key={item.id} className={styles.post} onClick={() => location.href = `community/articles/${item.id}`}>
                 <td className={styles.td}><img src='/images/image.png'/></td>
                 <td className={styles.td}>{item.subject}</td>
                 <td className={styles.td}>{item.author}</td>
                 <td className={styles.td}>{formatDate(item.created_at)}</td>
               </tr>
-            ))}
+            ))
+            :
+            list.map(item => (
+                <tr key={item.id} className={styles.post} onClick={() => location.href = `community/articles/${item.id}`}>
+                  <td className={styles.td}><img src='/images/image.png'/></td>
+                  <td className={styles.td}>{item.subject}</td>
+                  <td className={styles.td}>{item.author}</td>
+                  <td className={styles.td}>{formatDate(item.created_at)}</td>
+                </tr>
+            ))
+            }
           </tbody>
         </table>
       </div>
