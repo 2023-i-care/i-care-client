@@ -6,7 +6,7 @@ import {collection, getDocs, orderBy, query, onSnapshot} from 'firebase/firestor
 import { useEffect,useState } from 'react';
 import {DateTime} from 'luxon';
 import Link from 'next/link';
-
+import app from '@/net/firebaseApp';
 
 export default function Home() {
   const [list,setList]  = useState([]);
