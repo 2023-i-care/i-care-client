@@ -34,7 +34,7 @@ export default function Article() {
       articleId: router.query.id,
       comment,
     });
-    alert("저장 되었습니다");
+    alert("등록되었습니다");
     setComment("");
     router.push(`/community/articles/${router.query.id}`);
     //history.back();
@@ -66,25 +66,29 @@ export default function Article() {
   return (
     <div>
       <Navbar />
-      <div className={styles.postContainer}>
-        <div className={styles.post}>
-          <h1 className={styles.title}>{subject}</h1>
-          <hr className={styles.divider} />
-          <p className={styles.content}>{content}</p>
-        </div>
-      </div>
-      <div className={styles.commentsContainer}>
-        <textarea className={styles.commentsInput} type='text' placeholder="댓글을 입력하세요"
-          value={comment} onChange={event => setComment(event.target.value)} />
-        <button className={styles.submitBtn} onClick={submit}>등록하기</button>
-      </div>
-      <div className={styles.commentsList}>
-        {list.map(item => (
-          <div key={item.id} className={styles.commentContainer}>
-            <p className={styles.commentText}>{item.comment}</p>
-            <hr className={styles.commentHr} />
+      <div className={styles.container}>
+        <div className={styles.postContainer}>
+          <div className={styles.post}>
+            <h1 className={styles.title}>{subject}</h1>
+            <hr className={styles.divider} />
+            <p className={styles.content}>{content}</p>
           </div>
-        ))}
+        </div>
+        <div className={styles.comment}>
+          <div className={styles.commentsList}>
+            {list.map(item => (
+              <div key={item.id} className={styles.commentContainer}>
+                <p className={styles.commentText}>{item.comment}</p>
+                <hr className={styles.commentHr} />
+              </div>
+            ))}
+          </div>
+          <div className={styles.commentsContainer}>
+            <textarea className={styles.commentsInput} type='text' placeholder="댓글을 입력하세요"
+              value={comment} onChange={event => setComment(event.target.value)} />
+            <button className={styles.submitBtn} onClick={submit}>↖</button>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -1,14 +1,19 @@
-.postContainer {
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 992px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.postContainer {
+  margin-top: 124px;
 }
 
 /* 제목 내용 박스 */
 .post {
-  margin-top: 30px;
   border-radius: 10px;
-  width: 900px;
+  width: 685px;
+  height: 731px;
   padding: 20px;
   background-color: #fff9e3;
 }
@@ -31,25 +36,34 @@
   margin-top: 10px;
 }
 
+.comment {
+  display: flex;
+  flex-direction: column;
+}
+
 .commentsContainer {
+  position: absolute;
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 19px;
+  top: 840px;
+  margin-left: 12px;
 }
 
 /* 댓글 입력하는 곳 */
 .commentsInput {
-  margin-left: 510px;
-  width: 900px;
-  height: 100px;
+  width: 250px;
+  height: 40px;
   padding: 10px;
+  border-radius: 50px;
   border: 1px solid #fff9e3;
+  resize: none;
 }
 
 .submitBtn {
+  width: 20px;
+  height: 20px;
   border-radius: 10px;
-  margin-left: 10px;
-  padding: 10px 20px;
   border: none;
   background-color: #f6d697;
   color: white;
@@ -57,7 +71,11 @@
 }
 
 .commentsList {
-  margin-top: 30px;
+  margin-top: 124px;
+  width: 287px;
+  height: 731px;
+  background-color: #FFF9E3;
+  border-radius: 20px;
 }
 
 .commentContainer {
@@ -65,7 +83,6 @@
 }
 
 .commentText {
-  margin-left: 530px;
   padding: 10px;
   color: #dbbb7d;
 }
