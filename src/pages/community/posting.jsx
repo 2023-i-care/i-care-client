@@ -5,28 +5,45 @@ import {collection,addDoc} from 'firebase/firestore';
 import db from '../../net/db';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import auth from '@/net/auth';
+import app from "@/net/firebaseApp";
 
 const CommunityPosting = () => {
 	const [subject, setSubject] = useState();
 	const [content, setContent] = useState();
-	const [user, setUser] = useState();
+	const auth = getAuth(app);
+  	const [user, setUser] = useState(null);
 	const router = useRouter();
-	const submit = async() => {
-		await addDoc(collection(db, 'articles'), {
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+		  if (user) {
+			setUser(user);
+		  } else {
+			setUser(null);
+		  }
+		});
+	
+		return () => unsubscribe();
+	  }, []);
+	  const submit = async () => {
+		try {
+		  await addDoc(collection(db, 'articles'), {
 			subject,
 			content,
-			author : user.email,
-			created_at : new Date().getTime(),
-		})
-		alert('저장 되었습니다');
-		setSubject('');
-		setContent('');
-		router.push('/');
-		//history.back();
-		
-	}
+			author: user?.displayName || 'Unknown User',
+			created_at: new Date().getTime(),
+		  });
+	  
+		  alert('저장되었습니다');
+		  setSubject('');
+		  setContent('');
+		  router.push('/');
+		} catch (error) {
+		  console.error('Error adding document: ', error);
+		}
+	  };
 
 	useEffect(() => {
 		onAuthStateChanged(auth, user=> {
@@ -51,4 +68,4 @@ const CommunityPosting = () => {
     )
 }
 
-export default CommunityPosting;
+export default CommunityPosting; 
