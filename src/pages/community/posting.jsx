@@ -35,19 +35,19 @@ const CommunityPosting = () => {
 	},[])
 
     return(
-        <>
-            <Navbar/>
-			<div className={styles.container}>
-				<input className={styles.title} type='text' placeholder="제목을 입력하세요" 
-				value={subject} onChange= {event => setSubject(event.target.value)}/>
-				<textarea className={styles.content} type='text' placeholder="내용을 입력하세요"
-				value={content} onChange={event => setContent(event.target.value)}/>
-				<div className={styles.btn_container}>
-					<button className={styles.img_btn}>사진 업로드</button>
-					<button className={styles.post_btn} onClick={submit}>게시하기</button>
+			<>
+				<Navbar/>
+				<div className={styles.container}>
+					<input className={styles.title} type='text' placeholder="제목을 입력하세요" 
+						value={subject} onChange= {event => setSubject(event.target.value)}/>
+					<textarea className={styles.content} type='text' placeholder="내용을 입력하세요"
+						value={content} onChange={event => setContent(event.target.value)}/>
+					<div className={styles.btn_container}>
+						<button className={styles.img_btn}>사진 업로드</button>
+						<button className={styles.post_btn} onClick={submit}>게시하기</button>
+					</div>
 				</div>
-			</div>
-        </>
+			</>
     )
 }
 

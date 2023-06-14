@@ -1,18 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
-import { SetUserContext, UserContext } from "@/context/UserContext";
-import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import app from "@/net/firebaseApp";
 
 const MyPage = () => {
-  const user = useContext(UserContext);
-  const setUser = useContext(SetUserContext);
-  // axios.get("http://localhost:3001/signup")
-  //   .then((req) => {
-  //     setUser((prevState) => {
-  //       return {...prevState, id: req.id, name: req.name}
-  //     });
-  //   });
+  const auth = getAuth(app);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
@@ -21,8 +28,8 @@ const MyPage = () => {
         <div className={styles.profile_container}>
           <img src="/images/profile.png"/>
           <div className={styles.info_container}>
-            <div className={styles.text}>닉네임 : {user.name}</div>
-            <div className={styles.text}>아이디 : {user.id}</div>
+            <div className={styles.text}>닉네임 : {user?.displayName}</div>
+            <div className={styles.text}>아이디 : {user?.email}</div>
             <div className={styles.btn_container}>
               <button className={styles.btn}>정보수정</button>
               <button className={styles.btn}>저장</button>
