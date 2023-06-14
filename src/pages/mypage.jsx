@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -54,7 +54,7 @@ const MyPage = () => {
         <div className={styles.profile_container}>
           <img src="/images/profile.png"/>
           <div className={styles.info_container}>
-          <div className={styles.text}>닉네임 : {user?.email && user.email.split('@')[0]}</div>
+            <div className={styles.text}>닉네임 : {user?.displayName}</div>
             <div className={styles.text}>아이디 : {user?.email}</div>
             <div className={styles.btn_container}>
               <button className={styles.btn}>정보수정</button>
@@ -65,20 +65,19 @@ const MyPage = () => {
         <div className={styles.favorites_container}>
           <div className={styles.title}>내가 작성한 글</div>
           <div className={styles.content_container}>
-      {myPosts.length > 0 ? (
-        myPosts.map((post) => (
-          <div key={post.id} className={styles.post}>
-            {/* 게시물 내용을 표시하는 부분 */}
-            <h3>{post.subject}</h3>
-            <p>{post.content}</p>
+            {myPosts.length > 0 ? (
+              myPosts.map((post) => (
+                <div key={post.id} className={styles.post}>
+                  {/* 게시물 내용을 표시하는 부분 */}
+                  <h3>{post.subject}</h3>
+                  <p>{post.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>작성한 글이 없습니다.</p>
+            )}
           </div>
-        ))
-      ) : (
-        <p>작성한 글이 없습니다.</p>
-      )}
-    </div>
         </div>
-        
       </div>
     </>
   );
