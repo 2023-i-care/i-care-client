@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, where, query } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import app from "@/net/firebaseApp";
+import db from '../net/db';
 
 const MyPage = () => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
+  const [myPosts, setMyPosts] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -20,6 +23,29 @@ const MyPage = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const fetchMyPosts = async () => {
+      // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
+      const q = query(collection(db, 'articles'), where('author', '==', user.email));
+
+      try {
+        const querySnapshot = await getDocs(q);
+        const posts = [];
+        querySnapshot.forEach((doc) => {
+          // 각 문서의 데이터를 가져와서 posts 배열에 추가
+          posts.push({ id: doc.id, ...doc.data() });
+        });
+        setMyPosts(posts);
+      } catch (error) {
+        console.error('Error fetching posts: ', error);
+      }
+    };
+
+    if (user) {
+      fetchMyPosts();
+    }
+  }, [user]);
 
   return (
     <>
@@ -37,9 +63,19 @@ const MyPage = () => {
           </div>
         </div>
         <div className={styles.favorites_container}>
-          <div className={styles.title}>내가 좋아요 누른 글</div>
+          <div className={styles.title}>내가 작성한 글</div>
           <div className={styles.content_container}>
-            글 목록
+            {myPosts.length > 0 ? (
+              myPosts.map((post) => (
+                <div key={post.id} className={styles.post}>
+                  {/* 게시물 내용을 표시하는 부분 */}
+                  <h3>{post.subject}</h3>
+                  <p>{post.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>작성한 글이 없습니다.</p>
+            )}
           </div>
         </div>
       </div>
