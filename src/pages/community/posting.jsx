@@ -6,7 +6,6 @@ import db from '../../net/db';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import auth from '@/net/auth';
 import app from "@/net/firebaseApp";
 
 const CommunityPosting = () => {
@@ -36,7 +35,7 @@ const CommunityPosting = () => {
 			created_at: new Date().getTime(),
 		  });
 	  
-		  alert('저장되었습니다');
+			alert('게시글이 등록되었습니다');
 		  setSubject('');
 		  setContent('');
 		  router.push('/');
