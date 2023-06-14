@@ -27,7 +27,7 @@ const MyPage = () => {
   useEffect(() => {
     const fetchMyPosts = async () => {
       // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
-      const q = query(collection(db, 'articles'), where('author', '==', user.email));
+      const q = query(collection(db, 'articles'), where('author', '==', user.displayName));
 
       try {
         const querySnapshot = await getDocs(q);

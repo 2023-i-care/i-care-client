@@ -11,22 +11,37 @@ import auth from '@/net/auth';
 const DiaryPosting = () => {
   const [subject, setSubject] = useState();
 	const [content, setContent] = useState();
-	const [user, setUser] = useState();
 	const router = useRouter();
-	const submit = async() => {
-		await addDoc(collection(db, 'articles3'), {
+	const auth = getAuth(app);
+  	const [user, setUser] = useState(null);
+	  useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+		  if (user) {
+			setUser(user);
+		  } else {
+			setUser(null);
+		  }
+		});
+	
+		return () => unsubscribe();
+	  }, []);
+	  const submit = async () => {
+		try {
+		  await addDoc(collection(db, 'articles3'), {
 			subject,
 			content,
-			author : user.email,
-			created_at : new Date().getTime(),
-		})
-		alert('저장 되었습니다');
-		setSubject('');
-		setContent('');
-		router.push('/diary');
-		//history.back();
-		
-	}
+			author: user?.displayName || 'Unknown User',
+			created_at: new Date().getTime(),
+		  });
+	  
+		  alert('저장되었습니다');
+		  setSubject('');
+		  setContent('');
+		  router.push('/diary');
+		} catch (error) {
+		  console.error('Error adding document: ', error);
+		}
+	  };
 
 	useEffect(() => {
 		onAuthStateChanged(auth, user=> {
