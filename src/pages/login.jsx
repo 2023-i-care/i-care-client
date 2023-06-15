@@ -5,7 +5,10 @@ import auth from '../net/auth';
 import { useRouter } from "next/router";
 
 const Login = () => {
+
+    //이메일
     const [email, setEmail] = useState('');
+    //비밀번호
     const [password, setPassword] = useState('');
     const router = useRouter();
     const submit = () => {

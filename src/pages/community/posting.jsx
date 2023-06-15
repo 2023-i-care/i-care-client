@@ -100,4 +100,4 @@ const CommunityPosting = () => {
     )
 }
 
-export default CommunityPosting;
+export default CommunityPosting;  
