@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs, where, query } from 'firebase/firestore';
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import app from "@/net/firebaseApp";
-import db from '../net/db';
+import db from "../net/db";
 
 const MyPage = () => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [myPosts, setMyPosts] = useState([]);
+  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -26,33 +27,53 @@ const MyPage = () => {
 
   useEffect(() => {
     const fetchMyPosts = async () => {
-      // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
-      const q = query(collection(db, 'articles'), where('author', '==', user.email));
+      const q = query(
+        collection(db, "articles"),
+        where("author", "==", user.email)
+      );
 
       try {
         const querySnapshot = await getDocs(q);
         const posts = [];
         querySnapshot.forEach((doc) => {
-          // 각 문서의 데이터를 가져와서 posts 배열에 추가
           posts.push({ id: doc.id, ...doc.data() });
         });
         setMyPosts(posts);
       } catch (error) {
-        console.error('Error fetching posts: ', error);
+        console.error("Error fetching posts: ", error);
+      }
+    };
+
+    const fetchBookmarkedPosts = async () => {
+      const q = query(
+        collection(db, "articles"),
+        where("bookmarked", "==", true)
+      );
+
+      try {
+        const querySnapshot = await getDocs(q);
+        const posts = [];
+        querySnapshot.forEach((doc) => {
+          posts.push({ id: doc.id, ...doc.data() });
+        });
+        setBookmarkedPosts(posts);
+      } catch (error) {
+        console.error("Error fetching bookmarked posts: ", error);
       }
     };
 
     if (user) {
       fetchMyPosts();
+      fetchBookmarkedPosts();
     }
   }, [user]);
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className={styles.container}>
         <div className={styles.profile_container}>
-          <img src="/images/profile.png"/>
+          <img src="/images/profile.png" />
           <div className={styles.info_container}>
             <div className={styles.text}>닉네임 : {user?.displayName}</div>
             <div className={styles.text}>아이디 : {user?.email}</div>
@@ -75,6 +96,22 @@ const MyPage = () => {
               ))
             ) : (
               <p>작성한 글이 없습니다.</p>
+            )}
+          </div>
+        </div>
+        <div className={styles.favorites_container}>
+          <div className={styles.title}>찜한 글</div>
+          <div className={styles.content_container}>
+            {bookmarkedPosts.length > 0 ? (
+              bookmarkedPosts.map((post) => (
+                <div key={post.id} className={styles.post}>
+                  {/* 게시물 내용을 표시하는 부분 */}
+                  <h3>{post.subject}</h3>
+                  <p>{post.content}</p>
+                </div>
+              ))
+            ) : (
+              <p>찜한 글이 없습니다.</p>
             )}
           </div>
         </div>
