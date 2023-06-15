@@ -26,6 +26,21 @@ const CommunityPosting = () => {
 	
 		return () => unsubscribe();
 	  }, []);
+
+		const handleImageUpload = async () => {
+			if (!image) return;
+	
+			const storage = getStorage(app);
+			const storageRef = ref(storage, "images/" + image.name);
+	
+			try {
+				await uploadBytes(storageRef, image);
+				alert("이미지가 업로드되었습니다");
+			} catch (error) {
+				console.error("Error uploading image: ", error);
+			}
+		};
+
 	  const submit = async () => {
 		try {
 		  await addDoc(collection(db, 'articles'), {
@@ -50,6 +65,10 @@ const CommunityPosting = () => {
 		});
 	},[])
 
+	const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
+  };
+
     return(
         <>
             <Navbar/>
@@ -59,9 +78,23 @@ const CommunityPosting = () => {
 				<textarea className={styles.content} type='text' placeholder="내용을 입력하세요"
 				value={content} onChange={event => setContent(event.target.value)}/>
 				<div className={styles.btn_container}>
-					<button className={styles.img_btn}>사진 업로드</button>
+				<div className={styles.file_input_wrapper}>
+            <input
+              type="file"
+              accept="image/*"
+              className={styles.file_input}
+              onChange={handleImageChange}
+            />
+            <div className={styles.file_input_label}></div>
+          </div>
+            <div className={styles.file_input_label}></div>
 					<button className={styles.post_btn} onClick={submit}>게시하기</button>
 				</div>
+				{image && (
+          <div className={styles.image_preview}>
+            <img src={URL.createObjectURL(image)} alt="Uploaded" />
+          </div>
+        )}
 			</div>
         </>
     )
