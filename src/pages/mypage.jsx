@@ -6,6 +6,7 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import app from "@/net/firebaseApp";
 import db from "../net/db";
+import { DateTime } from "luxon";
 
 const MyPage = () => {
   const auth = getAuth(app);
@@ -27,7 +28,6 @@ const MyPage = () => {
 
   useEffect(() => {
     const fetchMyPosts = async () => {
-      // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
       const q = query(
         collection(db, "articles"),
         where("author", "==", user.email)
@@ -69,6 +69,34 @@ const MyPage = () => {
     }
   }, [user]);
 
+  const saveToBookmarks = async (articleId) => {
+    try {
+      await fetch("/api/bookmarks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ articleId }),
+      });
+      fetchBookmarkedPosts();
+    } catch (error) {
+      // 에러 처리
+    }
+  };
+
+  const formatDate = (timestamp) => {
+    if (!timestamp) {
+      return ''; // 또는 다른 기본값으로 변경
+    }
+    const date = DateTime.fromMillis(timestamp);
+    const today = DateTime.local().startOf('day');
+    if (date >= today) {
+      return date.toFormat('HH:mm');
+    } else {
+      return date.toFormat('yy-LL-dd');
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -76,29 +104,45 @@ const MyPage = () => {
         <div className={styles.profile_container}>
           <img src="/images/profile.png" />
           <div className={styles.info_container}>
-            <div className={styles.text}>닉네임 : {user?.displayName}</div>
-            <div className={styles.text}>아이디 : {user?.email}</div>
+            <div className={styles.text}>닉네임: {user?.displayName}</div>
+            <div className={styles.text}>아이디: {user?.email}</div>
             <div className={styles.btn_container}>
               <button className={styles.btn}>정보수정</button>
               <button className={styles.btn}>저장</button>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.favorites_container}>
-        <div className={styles.title}>찜한 글</div>
-        <div className={styles.content_container}>
-          {bookmarkedPosts.length > 0 ? (
-            bookmarkedPosts.map((post) => (
-              <div key={post.id} className={styles.post}>
-                {/* 게시물 내용을 표시하는 부분 */}
-                <h3>{post.subject}</h3>
-                <p>{post.content}</p>
-              </div>
-            ))
-          ) : (
-            <p>찜한 글이 없습니다.</p>
-          )}
+        <div className={styles.favorites_container}>
+          <div className={styles.bookmarkedPosts}>
+            <h2 className={styles.title}>내가 좋아요 한 글</h2>
+            <table className={styles.table}>
+              <colgroup>
+                <col style={{ width: "70%" }} />
+                <col style={{ width: "10%" }} />
+                <col style={{ width: "10%" }} />
+              </colgroup>
+              <thead className={styles.thead}>
+                <tr className={styles.tr}>
+                  <th className={styles.th}>제목</th>
+                  <th className={styles.th}>작성자</th>
+                  <th className={styles.th}>작성일</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookmarkedPosts.map((post) => (
+                    <tr key={post.id} 
+                      className={styles.post} 
+                      onClick={() =>
+                        (location.href = `community/articles/${post.id}`)
+                      }>
+                      <td className={styles.td}>{post.subject}</td>
+                      <td className={styles.td}>{post.author}</td>
+                      <td className={styles.td}>{formatDate(post.created_at)}</td>
+                    </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

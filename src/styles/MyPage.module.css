@@ -56,3 +56,20 @@
     background-color: #FFF9E3;
     border-radius: 20px;
 }
+
+.table {
+    width: 920px;
+    margin-top: 10px;
+    border-top: 1px solid #DBBB7D;
+    border-collapse: collapse;
+}
+  
+.th, .td {
+    border-bottom: 1px solid #DBBB7D;
+    padding: 10px;
+    color: #DBBB7D;
+}
+
+.post {
+    cursor: pointer;
+}
