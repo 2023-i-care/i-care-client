@@ -74,7 +74,7 @@ const DiaryPosting = () => {
       alert("게시글이 등록되었습니다");
       setSubject("");
       setContent("");
-      router.push('/diary');
+      router.push(`/diary/article/${docRef.id}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }

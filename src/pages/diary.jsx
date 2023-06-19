@@ -61,7 +61,9 @@ const Diary = () => {
       <div className={styles.gen_btn}><a href='/diary/posting'>글쓰기</a></div>
       <div className={styles.container}>
         {list.map(item => (
-          <div key={item.id} className={styles.diary_box}>
+          <div key={item.id} className={styles.diary_box} onClick={() =>
+            (location.href = `diary/articles/${item.id}`)
+          }>
             <div className={styles.content_container}>
               <div className={styles.title}>{item.subject}</div>
               <div className={styles.content}>{item.content}</div>
