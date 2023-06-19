@@ -105,9 +105,6 @@ const CommunityPosting = () => {
           onChange={handleImageUpload}
         />
         <div className={styles.btn_container}>
-          <button className={styles.img_btn}>
-            사진 업로드
-          </button>
           <button className={styles.post_btn} onClick={submit}>
             게시하기
           </button>
