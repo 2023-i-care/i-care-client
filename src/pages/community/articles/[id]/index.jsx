@@ -1,115 +1,135 @@
-import React, { useEffect, useState } from "react";
-import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import db from "@/net/db";
 import {
-  collection,
-  getDocs,
-  where,
-  query,
+  doc,
+  getDoc,
   onSnapshot,
+  query,
+  collection,
+  addDoc,
+  where,
 } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import app from "@/net/firebaseApp";
-import db from "@/net/db"; // 경로 수정
+import styles from "../../../../styles/CommunityPost.module.css";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
-const MyPage = () => {
-  const auth = getAuth(app);
-  const [user, setUser] = useState(null);
-  const [myPosts, setMyPosts] = useState([]);
-  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
-
+export default function Article() {
+  const router = useRouter();
+  const [subject, setSubject] = useState("");
+  const [content, setContent] = useState("");
+  const [comment, setComment] = useState("");
+  const [list, setList] = useState([]);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [imageURL, setImageURL] = useState(null);
+  const storage = getStorage(app);
+  
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    const fetchMyPosts = async () => {
-      // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
-      const q = query(
-        collection(db, "articles"),
-        where("author", "==", user.email)
-      );
-
+    const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(q);
-        const posts = [];
-        querySnapshot.forEach((doc) => {
-          posts.push({ id: doc.id, ...doc.data() });
-        });
-        setMyPosts(posts);
+        const docRef = doc(db, "articles", router.query.id);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        setSubject(data.subject);
+        setContent(data.content);
+        setBookmarked(data.bookmarked || false);
+        if (data.image) {
+          const storageRef = ref(storage, data.image);
+          const downloadURL = await getDownloadURL(storageRef);
+          setImageURL(downloadURL);
+        }
       } catch (error) {
-        console.error("Error fetching posts: ", error);
+        // 에러 처리
       }
-    };
+    };    
 
-    const fetchBookmarkedPosts = () => {
+    fetchData();
+  }, [router.query.id]);
+
+  const toggleBookmark = async () => {
+    try {
+      const docRef = doc(db, "articles", router.query.id);
+      await docRef.update({
+        bookmarked: !bookmarked,
+      });
+      setBookmarked((prevBookmark) => !prevBookmark);
+    } catch (error) {
+      // 에러 처리
+    }
+  };
+
+  const submit = async () => {
+    await addDoc(collection(db, "articles2"), {
+      articleId: router.query.id,
+      comment,
+    });
+    alert("댓글이 등록되었습니다");
+    setComment("");
+    router.push(`/community/articles/${router.query.id}`);
+  };
+
+  useEffect(() => {
+    if (router.query.id) {
       const q = query(
-        collection(db, "articles"),
-        where("bookmarked", "==", true)
+        collection(db, "articles2"),
+        where("articleId", "==", router.query.id)
       );
 
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const posts = [];
-        snapshot.forEach((doc) => {
-          posts.push({ id: doc.id, ...doc.data() });
+      const unsubscribe = onSnapshot(q, (results) => {
+        const newList = [];
+        results.forEach((doc) => {
+          const data = doc.data();
+          data.id = doc.id;
+          newList.push(data);
         });
-        setBookmarkedPosts(posts);
+        setList(newList);
       });
 
       return () => {
         unsubscribe();
       };
-    };
-
-    if (user) {
-      fetchMyPosts();
-      fetchBookmarkedPosts();
     }
-  }, [user]);
+  }, [router.query.id]);
 
   return (
-    <>
+    <div>
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.profile_container}>
-          <img src="/images/profile.png" />
-          <div className={styles.info_container}>
-            <div className={styles.text}>닉네임 : {user?.displayName}</div>
-            <div className={styles.text}>아이디 : {user?.email}</div>
-            <div className={styles.btn_container}>
-              <button className={styles.btn}>정보수정</button>
-              <button className={styles.btn}>저장</button>
-            </div>
+        <div className={styles.postContainer}>
+          <div className={styles.post}>
+            <h1 className={styles.title}>{subject}</h1>
+            {imageURL && <img src={imageURL} alt="게시물 이미지" className={styles.image}/>}
+            <hr className={styles.divider} />
+            <p className={styles.content}>{content}</p>
+          </div>
+          <button className={styles.bookmarkBtn} onClick={toggleBookmark}>
+            {bookmarked ? "찜 해제" : "찜하기"}
+          </button>
+        </div>
+        <div className={styles.comment}>
+          <div className={styles.commentsList}>
+            {list.map((item) => (
+              <div key={item.id} className={styles.commentContainer}>
+                <p className={styles.commentText}>{item.comment}</p>
+                <hr className={styles.commentHr} />
+              </div>
+            ))}
+          </div>
+          <div className={styles.commentsContainer}>
+            <textarea
+              className={styles.commentsInput}
+              type="text"
+              placeholder="댓글을 입력하세요"
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+            />
+            <button className={styles.submitBtn} onClick={submit}>
+              ↖
+            </button>
           </div>
         </div>
       </div>
-      <div className={styles.favorites_container}>
-        <div className={styles.title}>찜한 글</div>
-        <div className={styles.content_container}>
-          {bookmarkedPosts.length > 0 ? (
-            bookmarkedPosts.map((post) => (
-              <div key={post.id} className={styles.post}>
-                {/* 게시물 내용을 표시하는 부분 */}
-                <h3>{post.subject}</h3>
-                <p>{post.content}</p>
-              </div>
-            ))
-          ) : (
-            <p>찜한 글이 없습니다.</p>
-          )}
-        </div>
-      </div>
-    </>
+    </div>
   );
-};
-
-export default MyPage;
+}
