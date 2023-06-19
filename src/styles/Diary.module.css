@@ -50,11 +50,3 @@
     font-size: 16px;
     color: #DBBB7D;
 }
-
-.image {
-    background-image: url('../../public/images/diary_img.jpg');
-    background-size: cover;
-    width: 210px;
-    height: 150px;
-    border-radius: 20px;
-}
