@@ -8,6 +8,7 @@ import {
   collection,
   addDoc,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -50,15 +51,15 @@ export default function Article() {
   const toggleBookmark = async () => {
     try {
       const docRef = doc(db, "articles", router.query.id);
-      await docRef.update({
-        bookmarked: !bookmarked,
-      });
-      setBookmarked((prevBookmark) => !prevBookmark);
+      const updatedBookmark = !bookmarked; // 새로운 찜하기 상태 계산
+      await updateDoc(docRef, { bookmarked: updatedBookmark });
+      console.log("hi")
+      setBookmarked(updatedBookmark); // 상태 업데이트
     } catch (error) {
       // 에러 처리
     }
-  };
-
+  };  
+  
   const submit = async () => {
     await addDoc(collection(db, "articles2"), {
       articleId: router.query.id,
