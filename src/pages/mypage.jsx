@@ -28,7 +28,10 @@ const MyPage = () => {
   useEffect(() => {
     const fetchMyPosts = async () => {
       // Firestore에서 현재 사용자가 작성한 글을 가져오는 쿼리 생성
-      const q = query(collection(db, 'articles'), where('author', '==', user.email));
+      const q = query(
+        collection(db, "articles"),
+        where("author", "==", user.email)
+      );
 
       try {
         const querySnapshot = await getDocs(q);
@@ -81,37 +84,21 @@ const MyPage = () => {
             </div>
           </div>
         </div>
-        <div className={styles.favorites_container}>
-          <div className={styles.title}>내가 작성한 글</div>
-          <div className={styles.content_container}>
-            {myPosts.length > 0 ? (
-              myPosts.map((post) => (
-                <div key={post.id} className={styles.post}>
-                  {/* 게시물 내용을 표시하는 부분 */}
-                  <h3>{post.subject}</h3>
-                  <p>{post.content}</p>
-                </div>
-              ))
-            ) : (
-              <p>작성한 글이 없습니다.</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.favorites_container}>
-          <div className={styles.title}>찜한 글</div>
-          <div className={styles.content_container}>
-            {bookmarkedPosts.length > 0 ? (
-              bookmarkedPosts.map((post) => (
-                <div key={post.id} className={styles.post}>
-                  {/* 게시물 내용을 표시하는 부분 */}
-                  <h3>{post.subject}</h3>
-                  <p>{post.content}</p>
-                </div>
-              ))
-            ) : (
-              <p>찜한 글이 없습니다.</p>
-            )}
-          </div>
+      </div>
+      <div className={styles.favorites_container}>
+        <div className={styles.title}>찜한 글</div>
+        <div className={styles.content_container}>
+          {bookmarkedPosts.length > 0 ? (
+            bookmarkedPosts.map((post) => (
+              <div key={post.id} className={styles.post}>
+                {/* 게시물 내용을 표시하는 부분 */}
+                <h3>{post.subject}</h3>
+                <p>{post.content}</p>
+              </div>
+            ))
+          ) : (
+            <p>찜한 글이 없습니다.</p>
+          )}
         </div>
       </div>
     </>
