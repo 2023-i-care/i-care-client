@@ -104,12 +104,16 @@
   width: 45%;
 }
 .backbtn {
+  width: 150px;
+  height: 40px;
   color: white;
   background-color: #f6d697;
   border-color: #f6d697;
   border-radius: 7px;
 }
 .bookmarkBtn {
+  width: 150px;
+  height: 40px;
   color: white;
   background-color: #f6d697;
   border-color: #f6d697;
