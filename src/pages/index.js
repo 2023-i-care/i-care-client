@@ -2,55 +2,49 @@ import Navbar from '@/components/Navbar';
 import React from 'react';
 import styles from "@/styles/Community.module.css";
 import db from '../net/db';
-import {collection, getDocs, orderBy, query, onSnapshot} from 'firebase/firestore';
-import { useEffect,useState } from 'react';
-import {DateTime} from 'luxon';
+import { collection, getDocs, orderBy, query, onSnapshot } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { DateTime } from 'luxon';
 import Link from 'next/link';
 
-
 export default function Home() {
-  const [list,setList]  = useState([]);
+  const [list, setList] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [clicked, setClicked] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    onSnapshot(query(collection(db,'articles'),orderBy('created_at','desc')), results => {
+    const unsubscribe = onSnapshot(
+      query(collection(db, 'articles'), orderBy('created_at', 'desc')),
+      (snapshot) => {
         const newList = [];
-       results.forEach(doc => {
-         const data = doc.data();
-         data.id = doc.id;
-         newList.push(data);
-         console.log(doc.id);
-         console.log(doc.data());
-         console.log('------');
-       });
-       setList(newList)
-    })
-    // getDocs(query(collection(db,'articles'),orderBy('created_at','desc')))
-    //   .then(results => {
-    //     const newList = [];
-    //    results.forEach(doc => {
-    //      const data = doc.data();
-    //      data.id = doc.id;
-    //      newList.push(data);
-    //      console.log(doc.id);
-    //      console.log(doc.data());
-    //      console.log('------');
-    //    });
-    //    setList(newList)
-    //   })
-  },[]);
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          data.id = doc.id;
+          newList.push(data);
+        });
+        setList(newList);
+        setPosts(newList);
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const getValue = (e) => {
     setUserInput(e.target.value.toLowerCase());
   };
 
-  const searched = posts.filter((item) =>
-    item.subject && item.subject.toLowerCase().includes(userInput)
+  const searched = posts.filter(
+    (item) => item.subject && item.subject.toLowerCase().includes(userInput)
   );
 
   const formatDate = (timestamp) => {
+    if (!timestamp) {
+      return ''; // 또는 다른 기본값으로 변경
+    }
     const date = DateTime.fromMillis(timestamp);
     const today = DateTime.local().startOf('day');
     if (date >= today) {
@@ -62,7 +56,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className={styles.container}>
         <div className={styles.top_container}>
           <div className={styles.search_container}>
@@ -79,9 +73,9 @@ export default function Home() {
         </div>
         <table className={styles.table}>
           <colgroup>
-            <col style={{width: "70%"}}/>
-            <col style={{width: "10%"}}/>
-            <col style={{width: "10%"}}/>
+            <col style={{ width: "70%" }} />
+            <col style={{ width: "10%" }} />
+            <col style={{ width: "10%" }} />
           </colgroup>
           <thead className={styles.thead}>
             <tr className={styles.tr}>
@@ -91,33 +85,49 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-          {clicked
-            ? searched.length > 0 // 검색 결과가 있을 때
-              ? searched.map((item) => {
-                return (
-                  <tr
-                    key={item.id}
-                    className={styles.post}
-                    onClick={() => (location.href = `community/articles/${item.id}`)}
-                  >
-                    <td className={styles.td}>{item.subject}</td>
-                    <td className={styles.td}>{item.author}</td>
-                    <td className={styles.td}>{formatDate(item.created_at)}</td>
-                  </tr>
-                );
-              })
-              : <tr><td className={styles.no_result} colSpan={4}>검색 결과가 없습니다.</td></tr> // 검색 결과가 없을 때
-            : list.map((item) => (
+            {clicked ? (
+              searched.length > 0 ? (
+                searched.map((item) => {
+                  return (
+                    <tr
+                      key={item.id}
+                      className={styles.post}
+                      onClick={() =>
+                        (location.href = `community/articles/${item.id}`)
+                      }
+                    >
+                      <td className={styles.td}>{item.subject}</td>
+                      <td className={styles.td}>{item.author}</td>
+                      <td className={styles.td}>
+                        {formatDate(item.created_at)}
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td className={styles.no_result} colSpan={4}>
+                    검색 결과가 없습니다.
+                  </td>
+                </tr>
+              )
+            ) : (
+              list.map((item) => (
                 <tr
                   key={item.id}
                   className={styles.post}
-                  onClick={() => (location.href = `community/articles/${item.id}`)}
+                  onClick={() =>
+                    (location.href = `community/articles/${item.id}`)
+                  }
                 >
                   <td className={styles.td}>{item.subject}</td>
                   <td className={styles.td}>{item.author}</td>
-                  <td className={styles.td}>{formatDate(item.created_at)}</td>
+                  <td className={styles.td}>
+                    {formatDate(item.created_at)}
+                  </td>
                 </tr>
-            ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>
