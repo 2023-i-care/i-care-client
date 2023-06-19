@@ -35,6 +35,11 @@ export default function Home() {
 
   const getValue = (e) => {
     setUserInput(e.target.value.toLowerCase());
+    setClicked(false); // 검색어가 변경되면 검색 결과를 초기화합니다.
+  };
+
+  const handleSearch = () => {
+    setClicked(true);
   };
 
   const searched = posts.filter(
@@ -60,12 +65,12 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.top_container}>
           <div className={styles.search_container}>
-            <input className={styles.search_box} onChange={getValue} />
-            <img
-              className={styles.search_icon}
-              src="/images/search.png"
-              onClick={() => setClicked(true)}
-            />
+            <input className={styles.search_box} value={userInput} onChange={getValue} />
+              <img
+                className={styles.search_icon}
+                src="/images/search.png"
+                onClick={handleSearch}
+              />
           </div>
           <div className={styles.gen_btn}>
             <a href="/community/posting">글쓰기</a>
@@ -85,34 +90,14 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {clicked ? (
-              searched.length > 0 ? (
-                searched.map((item) => {
-                  return (
-                    <tr
-                      key={item.id}
-                      className={styles.post}
-                      onClick={() =>
-                        (location.href = `community/articles/${item.id}`)
-                      }
-                    >
-                      <td className={styles.td}>{item.subject}</td>
-                      <td className={styles.td}>{item.author}</td>
-                      <td className={styles.td}>
-                        {formatDate(item.created_at)}
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td className={styles.no_result} colSpan={4}>
-                    검색 결과가 없습니다.
-                  </td>
-                </tr>
-              )
+            {clicked && searched.length === 0 ? (
+              <tr>
+                <td className={styles.no_result} colSpan={3}>
+                  검색 결과가 없습니다.
+                </td>
+              </tr>
             ) : (
-              list.map((item) => (
+              (clicked ? searched : list).map((item) => (
                 <tr
                   key={item.id}
                   className={styles.post}
