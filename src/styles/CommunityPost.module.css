@@ -12,8 +12,8 @@
 /* 제목 내용 박스 */
 .post {
   border-radius: 10px;
-  width: 685px;
-  height: 731px;
+  width: 1010px;
+  height: 700px;
   padding: 20px;
   background-color: #fff9e3;
 }
@@ -118,4 +118,8 @@
   background-color: #f6d697;
   border-color: #f6d697;
   border-radius: 7px;
+}
+.image {
+  width: 400px;
+  height: 300px;
 }

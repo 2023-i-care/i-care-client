@@ -54,7 +54,7 @@ const DiaryPosting = () => {
       console.error("Error uploading image: ", error);
       throw error;
     }
-  };  
+  };
 
   const submit = async () => {
     try {
@@ -70,15 +70,15 @@ const DiaryPosting = () => {
         created_at: new Date().getTime(),
         image: imageURL, // 이미지 URL 저장
       });
-  
+
       alert("게시글이 등록되었습니다");
       setSubject("");
       setContent("");
-      router.push(`/diary/article/${docRef.id}`);
+      router.push("/diary");
     } catch (error) {
       console.error("Error adding document: ", error);
     }
-  };  
+  };
 
   return (
     <>
