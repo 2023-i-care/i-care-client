@@ -24,7 +24,7 @@ export default function Article() {
   const [bookmarked, setBookmarked] = useState(false);
   const [imageURL, setImageURL] = useState(null);
   const storage = getStorage(app);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +42,7 @@ export default function Article() {
       } catch (error) {
         // 에러 처리
       }
-    };    
+    };
 
     fetchData();
   }, [router.query.id]);
@@ -99,10 +99,19 @@ export default function Article() {
         <div className={styles.postContainer}>
           <div className={styles.post}>
             <h1 className={styles.title}>{subject}</h1>
-            {imageURL && <img src={imageURL} alt="게시물 이미지" className={styles.image}/>}
+            {imageURL && (
+              <img
+                src={imageURL}
+                alt="게시물 이미지"
+                className={styles.image}
+              />
+            )}
             <hr className={styles.divider} />
             <p className={styles.content}>{content}</p>
           </div>
+          <button className={styles.backbtn} onClick={() => router.push("/")}>
+            목록으로 돌아가기
+          </button>
           <button className={styles.bookmarkBtn} onClick={toggleBookmark}>
             {bookmarked ? "찜 해제" : "찜하기"}
           </button>

@@ -103,3 +103,15 @@
   border-top: 2px solid #fff9e3;
   width: 45%;
 }
+.backbtn {
+  color: white;
+  background-color: #f6d697;
+  border-color: #f6d697;
+  border-radius: 7px;
+}
+.bookmarkBtn {
+  color: white;
+  background-color: #f6d697;
+  border-color: #f6d697;
+  border-radius: 7px;
+}
