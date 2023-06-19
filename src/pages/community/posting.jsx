@@ -99,12 +99,16 @@ const CommunityPosting = () => {
           value={content}
           onChange={(event) => setContent(event.target.value)}
         />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
         <div className={styles.btn_container}>
+          <label className={styles.label}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className={styles.input}
+            />
+            사진 업로드
+          </label>
           <button className={styles.post_btn} onClick={submit}>
             게시하기
           </button>
