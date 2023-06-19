@@ -107,8 +107,7 @@ const MyPage = () => {
             <div className={styles.text}>닉네임: {user?.displayName}</div>
             <div className={styles.text}>아이디: {user?.email}</div>
             <div className={styles.btn_container}>
-              <button className={styles.btn}>정보수정</button>
-              <button className={styles.btn}>저장</button>
+              <button className={styles.btn}>로그인</button>
             </div>
           </div>
         </div>

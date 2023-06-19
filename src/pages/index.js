@@ -6,8 +6,13 @@ import { collection, getDocs, orderBy, query, onSnapshot } from 'firebase/firest
 import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import Link from 'next/link';
+import app from "@/net/firebaseApp";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { redirect } from 'next/dist/server/api-utils';
 
 export default function Home() {
+  const auth = getAuth(app);
+  const [user, setUser] = useState(null);
   const [list, setList] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [clicked, setClicked] = useState(false);
@@ -58,6 +63,16 @@ export default function Home() {
       return date.toFormat('yy-LL-dd');
     }
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        redirect("/login");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>
