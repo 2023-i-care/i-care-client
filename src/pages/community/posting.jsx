@@ -4,14 +4,13 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/CommunityPosting.module.css";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import db from "../../net/db";
 import app from "@/net/firebaseApp";
 
 const CommunityPosting = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
   const router = useRouter();
@@ -28,41 +27,59 @@ const CommunityPosting = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-  };
+  const [imageFile, setImageFile] = useState(null);
 
-  const handleImageUpload = async () => {
-    if (!image) return;
-
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
     const storage = getStorage(app);
-    const storageRef = ref(storage, "images/" + image.name);
+    const storageRef = ref(storage, "images/" + file.name);
 
     try {
-      await uploadBytes(storageRef, image);
-      alert("이미지가 업로드되었습니다");
+      await uploadBytes(storageRef, file);
+      setImageFile(file);
+      console.log("Image uploaded:", file.name);
     } catch (error) {
-      console.error("Error uploading image: ", error);
+      console.error("Error uploading image:", error);
     }
   };
 
+  const uploadImage = async (imageFile) => {
+    try {
+      const storage = getStorage(app);
+      const storageRef = ref(storage, `images/${imageFile.name}`);
+      await uploadBytes(storageRef, imageFile);
+      const downloadURL = await getDownloadURL(storageRef);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading image: ", error);
+      throw error;
+    }
+  };  
+
+
   const submit = async () => {
     try {
-      await addDoc(collection(db, "articles"), {
+      let imageURL = null;
+      if (imageFile) {
+        imageURL = await uploadImage(imageFile);
+      }
+
+      const docRef = await addDoc(collection(db, "articles"), {
         subject,
         content,
         author: user?.displayName || "Unknown User",
         created_at: new Date().getTime(),
+        image: imageURL, // 이미지 URL 저장
       });
-
+  
       alert("게시글이 등록되었습니다");
       setSubject("");
       setContent("");
-      router.push("/");
+      router.push(`/community/articles/${docRef.id}`);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
-  };
+  };  
 
   return (
     <>
@@ -82,25 +99,19 @@ const CommunityPosting = () => {
           value={content}
           onChange={(event) => setContent(event.target.value)}
         />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+        />
         <div className={styles.btn_container}>
-          <div className={styles.file_input_wrapper}>
-            <input
-              type="file"
-              accept="image/*"
-              className={styles.file_input}
-              onChange={handleImageChange}
-            />
-            <div className={styles.file_input_label}></div>
-          </div>
+          <button className={styles.img_btn}>
+            사진 업로드
+          </button>
           <button className={styles.post_btn} onClick={submit}>
             게시하기
           </button>
         </div>
-        {image && (
-          <div className={styles.image_preview}>
-            <img src={URL.createObjectURL(image)} alt="Uploaded" />
-          </div>
-        )}
       </div>
     </>
   );
