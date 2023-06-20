@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/MyPage.module.css";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, where, query } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
@@ -13,6 +14,8 @@ const MyPage = () => {
   const [user, setUser] = useState(null);
   const [myPosts, setMyPosts] = useState([]);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -97,6 +100,9 @@ const MyPage = () => {
     }
   };
 
+  const logout = () => {
+    router.push('/login')
+  }
   return (
     <>
       <Navbar />
@@ -107,7 +113,7 @@ const MyPage = () => {
             <div className={styles.text}>닉네임: {user?.displayName}</div>
             <div className={styles.text}>아이디: {user?.email}</div>
             <div className={styles.btn_container}>
-              <button className={styles.btn}>로그아웃</button>
+              <button className={styles.btn} onClick={logout}>로그아웃</button>
             </div>
           </div>
         </div>
