@@ -105,6 +105,8 @@
   width: 45%;
 }
 .backbtn {
+  border: 0;
+  margin-left: 4px;
   margin-top: 20px;
   width: 150px;
   height: 40px;
@@ -114,6 +116,8 @@
   border-radius: 7px;
 }
 .bookmarkBtn {
+  margin-left: 10px;
+  border: 0;
   width: 150px;
   height: 40px;
   color: white;

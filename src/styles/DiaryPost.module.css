@@ -135,6 +135,7 @@
   height: auto;
 }
 .backbtn {
+  border: 0;
   margin-left: 400px;
   margin-top: 20px;
   width: 150px;
