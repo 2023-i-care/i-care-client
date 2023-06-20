@@ -76,7 +76,10 @@ export default function Article() {
             <hr className={styles.divider} />
             <p className={styles.content}>{content}</p>
           </div>
-          <button className={styles.backbtn} onClick={() => router.push("/")}>
+          <button
+            className={styles.backbtn}
+            onClick={() => router.push("/diary")}
+          >
             목록으로 돌아가기
           </button>
         </div>
