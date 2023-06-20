@@ -53,13 +53,13 @@ export default function Article() {
       const docRef = doc(db, "articles", router.query.id);
       const updatedBookmark = !bookmarked; // 새로운 찜하기 상태 계산
       await updateDoc(docRef, { bookmarked: updatedBookmark });
-      console.log("hi")
+      console.log("hi");
       setBookmarked(updatedBookmark); // 상태 업데이트
     } catch (error) {
       // 에러 처리
     }
-  };  
-  
+  };
+
   const submit = async () => {
     await addDoc(collection(db, "articles2"), {
       articleId: router.query.id,
@@ -135,7 +135,7 @@ export default function Article() {
               onChange={(event) => setComment(event.target.value)}
             />
             <button className={styles.submitBtn} onClick={submit}>
-              ↖
+              ➜
             </button>
           </div>
         </div>
