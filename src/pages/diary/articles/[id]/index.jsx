@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import app from "@/net/firebaseApp";
-import styles from "../../../../styles/CommunityPost.module.css";
+import styles from "../../../../styles/DiaryPost.module.css";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 export default function Article() {
