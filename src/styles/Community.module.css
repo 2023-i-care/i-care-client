@@ -1,69 +1,74 @@
 .container {
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    width: 920px;
-    margin:  0 auto;
-    margin-top: 60px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 920px;
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
 .top_container {
-    width: 920px;
-    display: flex;
-    justify-content: space-between;
+  width: 920px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search_box {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 500px;
-    height: 36px;
-    padding: 10px;
-    background-color: #FFF9E3;
-    border: 0;
-    outline: none;
-    border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 500px;
+  height: 36px;
+  padding: 10px;
+  background-color: #fff9e3;
+  border: 0;
+  outline: none;
+  border-radius: 10px;
 }
 
 .search_icon {
-    margin-left: -40px;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+  margin-left: -40px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .gen_btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 40px;
-    background-color: #F6D697;
-    color: white;
-    border-radius: 8px;
-    border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 40px;
+  background-color: #f6d697;
+  color: white;
+  border-radius: 8px;
+  border: 0;
 }
 
 .table {
-    width: 920px;
-    margin-top: 10px;
-    border-top: 1px solid #DBBB7D;
-    border-collapse: collapse;
+  width: 920px;
+  margin-top: 10px;
+  border-top: 1px solid #dbbb7d;
+  border-collapse: collapse;
 }
-  
-.th, .td {
-    border-bottom: 1px solid #DBBB7D;
-    padding: 10px;
-    color: #DBBB7D;
+
+.th,
+.td {
+  border-bottom: 1px solid #dbbb7d;
+  padding: 10px;
+  color: #dbbb7d;
 }
 
 .post {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.author {
+  text-align: center;
 }

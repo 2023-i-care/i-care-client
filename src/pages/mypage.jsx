@@ -89,20 +89,20 @@ const MyPage = () => {
 
   const formatDate = (timestamp) => {
     if (!timestamp) {
-      return ''; // 또는 다른 기본값으로 변경
+      return ""; // 또는 다른 기본값으로 변경
     }
     const date = DateTime.fromMillis(timestamp);
-    const today = DateTime.local().startOf('day');
+    const today = DateTime.local().startOf("day");
     if (date >= today) {
-      return date.toFormat('HH:mm');
+      return date.toFormat("HH:mm");
     } else {
-      return date.toFormat('yy-LL-dd');
+      return date.toFormat("yy-LL-dd");
     }
   };
 
   const logout = () => {
-    router.push('/login')
-  }
+    router.push("/login");
+  };
   return (
     <>
       <Navbar />
@@ -113,7 +113,9 @@ const MyPage = () => {
             <div className={styles.text}>닉네임: {user?.displayName}</div>
             <div className={styles.text}>아이디: {user?.email}</div>
             <div className={styles.btn_container}>
-              <button className={styles.btn} onClick={logout}>로그아웃</button>
+              <button className={styles.btn} onClick={logout}>
+                로그아웃
+              </button>
             </div>
           </div>
         </div>
@@ -135,15 +137,21 @@ const MyPage = () => {
               </thead>
               <tbody>
                 {bookmarkedPosts.map((post) => (
-                    <tr key={post.id} 
-                      className={styles.post} 
-                      onClick={() =>
-                        (location.href = `community/articles/${post.id}`)
-                      }>
-                      <td className={styles.td}>{post.subject}</td>
-                      <td className={styles.td}>{post.author}</td>
-                      <td className={styles.td}>{formatDate(post.created_at)}</td>
-                    </tr>
+                  <tr
+                    key={post.id}
+                    className={styles.post}
+                    onClick={() =>
+                      (location.href = `community/articles/${post.id}`)
+                    }
+                  >
+                    <td className={styles.td}>{post.subject}</td>
+                    <td className={`${styles.td} ${styles.author}`}>
+                      {post.author}
+                    </td>
+                    <td className={`${styles.td} ${styles.author}`}>
+                      {formatDate(post.created_at)}
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>

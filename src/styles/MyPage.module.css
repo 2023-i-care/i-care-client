@@ -1,75 +1,80 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 80px;
 }
 
 .profile_container {
-    display: flex;
-    column-gap: 40px;
-    width: 920px;
+  display: flex;
+  column-gap: 40px;
+  width: 920px;
 }
 
 .info_container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    row-gap: 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 5px;
 }
 
 .text {
-    font-size: 18px;
-    color: #DBBB7D;
+  font-size: 18px;
+  color: #dbbb7d;
 }
 
 .btn_container {
-    display: flex;
-    column-gap: 10px;
-    margin-top: 15px;
+  display: flex;
+  column-gap: 10px;
+  margin-top: 15px;
 }
 
 .btn {
-    width: 90px;
-    height: 30px;
-    background-color: #F6D697;
-    border: 0;
-    color: white;
-    border-radius: 8px;
+  width: 90px;
+  height: 30px;
+  background-color: #f6d697;
+  border: 0;
+  color: white;
+  border-radius: 8px;
 }
 
 .favorites_container {
-    width: 920px;
-    margin-top: 68px;
+  width: 920px;
+  margin-top: 68px;
 }
 
 .title {
-    font-size: 18px;
-    color: #DBBB7D;
+  font-size: 18px;
+  color: #dbbb7d;
 }
 
 .content_container {
-    height: 600px;
-    margin-top: 10px;
-    padding: 20px;
-    background-color: #FFF9E3;
-    border-radius: 20px;
+  height: 600px;
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #fff9e3;
+  border-radius: 20px;
 }
 
 .table {
-    width: 920px;
-    margin-top: 10px;
-    border-top: 1px solid #DBBB7D;
-    border-collapse: collapse;
+  width: 920px;
+  margin-top: 10px;
+  border-top: 1px solid #dbbb7d;
+  border-collapse: collapse;
 }
-  
-.th, .td {
-    border-bottom: 1px solid #DBBB7D;
-    padding: 10px;
-    color: #DBBB7D;
+
+.th,
+.td {
+  border-bottom: 1px solid #dbbb7d;
+  padding: 10px;
+  color: #dbbb7d;
 }
 
 .post {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.author {
+  text-align: center;
 }

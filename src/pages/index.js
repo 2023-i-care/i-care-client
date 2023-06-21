@@ -1,26 +1,32 @@
-import Navbar from '@/components/Navbar';
-import React from 'react';
+import Navbar from "@/components/Navbar";
+import React from "react";
 import styles from "@/styles/Community.module.css";
-import db from '../net/db';
-import { collection, getDocs, orderBy, query, onSnapshot } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { DateTime } from 'luxon';
-import Link from 'next/link';
+import db from "../net/db";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  onSnapshot,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { DateTime } from "luxon";
+import Link from "next/link";
 import app from "@/net/firebaseApp";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { redirect } from 'next/dist/server/api-utils';
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Home() {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [list, setList] = useState([]);
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
   const [clicked, setClicked] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      query(collection(db, 'articles'), orderBy('created_at', 'desc')),
+      query(collection(db, "articles"), orderBy("created_at", "desc")),
       (snapshot) => {
         const newList = [];
         snapshot.forEach((doc) => {
@@ -53,14 +59,14 @@ export default function Home() {
 
   const formatDate = (timestamp) => {
     if (!timestamp) {
-      return ''; // 또는 다른 기본값으로 변경
+      return ""; // 또는 다른 기본값으로 변경
     }
     const date = DateTime.fromMillis(timestamp);
-    const today = DateTime.local().startOf('day');
+    const today = DateTime.local().startOf("day");
     if (date >= today) {
-      return date.toFormat('HH:mm');
+      return date.toFormat("HH:mm");
     } else {
-      return date.toFormat('yy-LL-dd');
+      return date.toFormat("yy-LL-dd");
     }
   };
 
@@ -80,12 +86,16 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.top_container}>
           <div className={styles.search_container}>
-            <input className={styles.search_box} value={userInput} onChange={getValue} />
-              <img
-                className={styles.search_icon}
-                src="/images/search.png"
-                onClick={handleSearch}
-              />
+            <input
+              className={styles.search_box}
+              value={userInput}
+              onChange={getValue}
+            />
+            <img
+              className={styles.search_icon}
+              src="/images/search.png"
+              onClick={handleSearch}
+            />
           </div>
           <div className={styles.gen_btn}>
             <a href="/community/posting">글쓰기</a>
@@ -121,8 +131,10 @@ export default function Home() {
                   }
                 >
                   <td className={styles.td}>{item.subject}</td>
-                  <td className={styles.td}>{item.author}</td>
-                  <td className={styles.td}>
+                  <td className={`${styles.td} ${styles.author}`}>
+                    {item.author}
+                  </td>
+                  <td className={`${styles.td} ${styles.author}`}>
                     {formatDate(item.created_at)}
                   </td>
                 </tr>
